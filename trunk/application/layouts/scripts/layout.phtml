@@ -1,0 +1,50 @@
+<!-- This line outputs the doctype we set in the bootstrap -->
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>myCharityPie: many charities, one donation</title>
+  <?php echo $this->headLink()->appendStylesheet('/css/reset.css') ?>
+  <?php echo $this->headLink()->appendStylesheet('/css/text.css') ?>
+  <?php echo $this->headLink()->appendStylesheet('/css/960.css') ?>
+  <?php echo $this->headLink()->appendStylesheet('/css/site.css') ?>
+  <?php echo $this->headLink()->appendStylesheet('/css/global.css') ?>
+</head>
+<body class="body-causes">
+<div id="topbar">
+
+<div class="container_12">
+    <div id="utility-links" class="grid_10">
+		<a href="/about/">About</a>
+	</div>
+    <div id="utility-user" class="grid_2">
+		<?php echo $this->profileLink(); ?>
+	</div>
+    <div class="clear"></div>
+	</div>
+</div>
+<div id="header" class="container_12">
+	<div id="header-logo" class="grid_6">
+		<a href="/"><img src="/img/logo.jpg" width="408" height="134" border="0" alt="myCharityPie" /></a>
+	</div>
+	<div id="header-description" class="grid_6">
+        <h2>One donation, many charities</h2>
+        <p>Find your favourite charities. Discover new charities.<br />
+		See your friends' favourite charities.<br />
+		Put them all together to make your own CharityPie.<br />
+		Make a cause of your selected charities.<br />
+		Share them with your friends!</p>
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+	<?php echo $this->layout()->content ?>
+
+<div id="footer-container" class="container_12">
+ 	<div id="footer" class="grid_12">
+		<a href="/about/">About</a> | <a href="/about/terms/">Terms &amp; Conditions</a> | <a href="/about/privacy/">Privacy policy</a> | <a href="/about/contact/">Contact Us</a>
+		<p class="copyright">&copy; 2009 myCharityPie</p>
+	</div>
+</div>
+</body>
+</html> 

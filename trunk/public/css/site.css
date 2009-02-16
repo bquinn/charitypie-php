@@ -1,0 +1,198 @@
+body
+{
+	color: #222222;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 0.8em;
+	font-style: normal;
+	font-weight: normal;
+	text-transform: normal;
+	letter-spacing: normal;
+	line-height: 1.45em;
+}
+
+h1 
+{
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 250%;
+	letter-spacing: -0.03em;
+	font-weight: lighter;
+}
+h2 
+{
+	font-family: Georgia, serif;
+	font-size: 200%;
+	font-weight: bold;
+	font-style: italic;
+}
+h3 {
+	font-family: Georgia, serif;
+	font-size: 130%;
+	font-weight: bold;
+	font-style: italic;
+	margin-top: 10px;
+}
+h4 
+{
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 200%;
+	letter-spacing: -0.03em;
+	font-weight: lighter;
+}
+h5 
+{
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 140%;
+	font-weight: lighter;
+}
+h6 
+{
+	font-family: Georgia, serif;
+	font-size: 150%;
+	margin-bottom: 2px;
+}
+p {}
+a 
+{
+	text-decoration: none;
+	color: #596CB3;
+}
+a:hover
+{
+	text-decoration: underline;
+}
+#topbar
+{
+	background-color: #596CB3;
+	margin-bottom: 20px;
+	color: #FFFFFF;
+	padding: 1px 0;
+}
+
+#topbar a
+{
+	color: #ffffff;
+}
+#header
+{
+	
+}
+
+#menu
+{
+	margin-bottom: 0;
+}
+
+#menu-filler, #menu-charities, #menu-causes, #menu-mypie
+{
+	text-align: center;
+	-moz-border-radius-topleft: 6px;
+	-moz-border-radius-topright: 6px;
+	-webkit-border-radius-topleft: 6px;
+	-webkit-border-radius-topright: 6px;
+	padding: 5px 0 3px 0;
+}
+
+#menu-charities { background: #99cc6a; }
+#menu-causes { background: #fdb741; }
+#menu-mypie { background: #8193df; }
+.body-current { color: #ffffff; }
+.menu-charities-filler, .menu-causes-filler, .menu-mypie-filler {
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+}
+body.body-charities .menu-charities-filler
+{
+	border-bottom-color: #99cc6a;
+}
+body.body-charities #menu-charities
+{
+	color: #FFFFFF;
+}
+
+body.body-causes .menu-charities-filler
+{
+	border-bottom-color: #fdb741;
+}
+body.body-causes #menu-causes
+{
+	color: #FFFFFF;
+}
+body.body-mypie .menu-charities-filler
+{
+	border-bottom-color: #8193df;
+}
+body.body-mypie  #menu-mypie
+{
+	color: #FFFFFF;
+}
+#contents {
+	margin-bottom: 20px;
+}
+
+#contents-sidebar {
+	margin-left: 0;
+	padding: 10px;
+	width: 210px;
+	-moz-border-radius-bottomleft: 6px;
+	-moz-border-radius-bottomright: 6px;
+	-webkit-border-radius-bottomleft: 6px;
+	-webkit-border-radius-bottomright: 6px;
+}
+
+body.body-charities #contents-sidebar {
+	background: #99cc6a;
+}
+body.body-causes #contents-sidebar {
+	background: #fdb741;
+}
+body.body-mypie #contents-sidebar {
+	background: #8193df;
+}
+
+#search {
+	width: 100%;
+	margin-bottom: 10px;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+#category {
+	width: 100%;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+#contents-main {
+	padding-top: 10px;
+}
+
+#teasers div
+{
+	text-align: center;
+}
+
+#teasers a
+{
+	color: #FFFFFF;
+}
+
+#teasers-charities
+{
+	background-color: #99CC6A;
+}
+
+#teasers-causes
+{
+	background-color: #FDB740;
+}
+
+#teasers-mypie
+{
+	background-color: #8193df;
+}
+
+#footer {
+	clear: both;
+}
+
+h6 a {
+	color: #222222;
+}

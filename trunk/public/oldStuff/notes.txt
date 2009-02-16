@@ -1,0 +1,3 @@
+useful example of portfolio chart:
+
+https://www.colonialfirststate.com.au/DynamicImageHandler.axd?ComponentId=CFS.OS.App.FirstNet.Charts.PortfolioAllocation&ChartType=I&ChartTitle=Portfolio%20Allocation&ImageWidth=550&ImageHeight=300&Percentages=36.89,26.22,36.89&Investments=90-01,90-05,90-34
