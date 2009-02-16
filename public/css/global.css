@@ -1,0 +1,214 @@
+html {
+	min-width: 945px; /*IE7*/
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	background-color: #fff;
+} /*IE7*/
+
+/* body{
+	font-family:"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+
+	margin-top: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 0px;
+	
+	width: 900px;
+	text-align: left;
+} */
+
+/* p, h1, form, button{border:0; margin:0; padding:0;} */
+/* .spacer{clear:both; height:1px;} */
+
+/* div.header h1 {
+	width: 500px;
+	margin-top: 5px;
+	margin-bottom: 0px;
+	margin-left: 175px;
+	color: #777;
+} */
+
+/* div.header p {
+	width: 500px;
+	margin-bottom: 0px;
+	margin-left: 175px;
+	color: #aaa;
+} */
+
+/* div.item {
+	margin-top: 30px;
+	clear: left;
+} */
+
+/* div.item_date {
+	float: left;
+	width: 150px;
+	color: #c6c1a5;
+	font-size: 1.2em;
+	line-height: 1.2em;
+	margin-top: 0;
+	margin-bottom: 0px;
+	padding-top: 5px;
+	text-align: right;
+} */
+
+/* item_header contains item_title inside an a tag */
+/* h2.item_header {
+	float: left;
+	width: 700px;
+	margin-top: 0;
+	margin-bottom: 0px;
+	padding-top: 5px;
+	margin-left: 25px;
+	font-size: 1.2em;
+} */
+
+/* a.item_title { font-weight: bold; } */
+
+/* div.item_feed_name {
+	float: left;
+	font-style: italic;
+	width: 700px;
+	margin-top: 0;
+	padding-top: 0;
+	margin-left: 175px;
+	line-height: 1em;
+	font-size: 1em;
+} */
+
+/* div.item_description {
+	float: left;
+	width: 700px;
+	padding-top: 10px;
+	margin-left: 175px;
+	margin-bottom: 5px;
+	line-height: 1em;
+	font-size: 1em;
+} */
+
+/* ----------- My Form ----------- */
+.myform{ margin:0 auto; width:470px; padding:14px; }
+
+/* ----------- stylized ----------- */
+#stylized {
+	border:solid 2px #b7ddf2;
+	background:#ebf4fb;
+}
+#stylized h1 {
+	font-size:14px;
+	font-weight:bold;
+	margin-bottom:8px;
+}
+/* hints on RHS of form elements */
+#stylized p.description {
+	font-size:11px;
+	float: right;
+	width: 110px;
+	color:#666666;
+	display: block;
+	margin:0px 0px 5px 5px;
+}
+/* other text that isn't part of the form */
+#stylized p.info {
+	clear: both;
+	font-size:11px;
+	color:#666666;
+	margin-bottom:20px;
+	border-bottom:solid 1px #b7ddf2;
+	padding-bottom:10px;
+}
+/* label on LHS of form elements */
+#stylized label {
+/*	display:block; */
+	font-weight:bold;
+	text-align:right;
+	width:120px;
+	clear:both;
+	float:left;
+}
+/* small text under form labels (not used... yet?) */
+#stylized .small{
+	color:#666666;
+	display:block;
+	font-size:11px;
+	font-weight:normal;
+	text-align:right;
+	width:140px;
+}
+#stylized input,textarea {
+	float:left;
+	font-size:12px;
+	padding:4px 2px;
+	border:solid 1px #aacfe4;
+	width:200px;
+	margin:2px 10px 5px 10px;
+}
+#stylized dt {
+	clear: both;
+}
+#stylized dd.recaptcha {
+	float:left;
+	font-size:12px;
+	padding:1px 1px;
+	border:none;
+	width:200px;
+	margin:2px 0 20px 10px;
+}
+#stylized dd.recaptcha p.description {
+	float: left;
+	width: 300px;
+}
+#stylized button{
+	clear:both;
+	float: left;
+	margin-left:150px;
+	width:125px;
+	height:31px;
+	background:#666666 url(http://www.mycharitypie.com/img/button.png) no-repeat;
+	text-align:center;
+	line-height:31px;
+	color:#FFFFFF;
+	font-size:11px;
+	font-weight:bold;
+}
+/* used for form hints, eg wrong credentials or badly formatted email addr */
+#stylized p.hint {color: #FF3333; font-weight: bold; font-size: 14px; }
+
+ul.errors { margin: 0; padding: 0; }
+ul.errors li {clear: left; margin-left: 50px; padding: 0; list-style: none; color: #FF3333; font-weight: bold; font-size: 14px; }
+
+/* ----- login stuff for right-hand corner ----- */
+#login-block { text-align: right; }
+
+/* ----- main header ----- */
+.header { font-color: red; }
+.header.header-logo { font-color: green; }
+.header.header-navigation { font-color: grey; }
+
+/* ----- footer on every page ----- */
+div.footer-wrapper { clear: both; padding-top: 30px; }
+div.page-footer {
+ horiz-align: center; clear:both; text-align: center; width:400px; height:31px;
+ line-height:31px; color:#FFFFFF; font-size:11px; font-weight:bold;
+ border:solid 2px #b7ddf2; background:#ebf4fb;
+}
+
+/* textarea {
+    width: 76%;
+    height: 30em;
+} */
+
+/*dt {
+	float: left;
+} */
+
+p.copyright {
+	color:#666666;
+	display:block;
+	font-size:11px;
+	font-weight:normal;
+	text-align:center;
+}

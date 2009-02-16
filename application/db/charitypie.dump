@@ -1,0 +1,343 @@
+-- MySQL dump 10.11
+--
+-- Host: localhost    Database: charitypie
+-- ------------------------------------------------------
+-- Server version	5.0.51b
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `cause_tags`
+--
+
+DROP TABLE IF EXISTS `cause_tags`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `cause_tags` (
+  `tag_id` int(10) unsigned NOT NULL auto_increment,
+  `user_id` int(10) unsigned NOT NULL,
+  `cause_id` int(10) unsigned NOT NULL,
+  KEY `fk_tag_user` (`user_id`),
+  KEY `fk_tag_user1` (`user_id`),
+  KEY `fk_tag_causes` (`tag_id`),
+  KEY `fk_tag_causes1` (`cause_id`),
+  KEY `fk_cause_tag_tag` (`tag_id`),
+  CONSTRAINT `fk_tag_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tag_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tag_causes` FOREIGN KEY (`tag_id`) REFERENCES `causes` (`cause_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tag_causes1` FOREIGN KEY (`cause_id`) REFERENCES `causes` (`cause_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cause_tag_tag` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`tag_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `cause_tags`
+--
+
+LOCK TABLES `cause_tags` WRITE;
+/*!40000 ALTER TABLE `cause_tags` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cause_tags` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `causes`
+--
+
+DROP TABLE IF EXISTS `causes`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `causes` (
+  `cause_id` int(10) unsigned NOT NULL auto_increment,
+  `title` varchar(45) default NULL,
+  `description` text,
+  `user_id` int(10) unsigned NOT NULL,
+  `pie_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`cause_id`),
+  KEY `fk_causes_user` (`user_id`),
+  KEY `fk_causes_pies` (`pie_id`),
+  CONSTRAINT `fk_causes_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_causes_pies` FOREIGN KEY (`pie_id`) REFERENCES `pies` (`pie_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `causes`
+--
+
+LOCK TABLES `causes` WRITE;
+/*!40000 ALTER TABLE `causes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `causes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `charities`
+--
+
+DROP TABLE IF EXISTS `charities`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `charities` (
+  `charity_id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(45) NOT NULL,
+  `website` varchar(45) default NULL,
+  `description` text,
+  `phone` varchar(45) default NULL,
+  `address` text,
+  `registration` varchar(45) default NULL,
+  `operating_location` varchar(45) default NULL,
+  `category_id` int(10) unsigned default NULL,
+  PRIMARY KEY  (`charity_id`),
+  KEY `fk_charities_charity_category` (`category_id`),
+  CONSTRAINT `fk_charities_charity_category` FOREIGN KEY (`category_id`) REFERENCES `charity_category` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `charities`
+--
+
+LOCK TABLES `charities` WRITE;
+/*!40000 ALTER TABLE `charities` DISABLE KEYS */;
+INSERT INTO `charities` VALUES (1,'Oxfam','http://www.oxfam.org.uk/','Oxfam\'s objects are for the prevention and relief of poverty anywhere in the world. Oxfam furthers its objects through three interlinked activities: humanitarian relief, development work and advocacy and campaigning. Oxfam is an affiliate member of Oxfam International. Details of Oxfam\'s mission and ways of working can be found at www.oxfam.org.uk','0870 333 2444','Oxfam, 2700 John Smith Drive, Oxford Business Park South, Oxford, OX4 2JY','202918','Throughout England and Wales, Worldwide',6),(2,'Barnardo\'s','http://www.barnardos.org.uk/','Barnardo\'s runs a wide variety of projects including: disability services; family centres; education, employment and training; fostering and adoption; youth justice; homelessness; safeguarding and protection and residential and leaving care services. We also campaign, bringing vital issues to the attention of the public and the government. We do this because we believe in children.','020 8550 8822','Barnardos Head Office, Tanners Lane, Barkingside, Ilford IG6 1QG','216250','Throughout England and Wales, Northern Irelan',7),(3,'The Save the Children Fund','http://www.savethechildren.org.uk/','To relieve the distress and to promote the welfare of children in any country or countries, without differentiation on the ground of race, colour, nationality, creed or sex to educate the public concerning the nature, causes and effects of distress, and want of welfare as aforesaid, and to conduct and procure research concerning the same and to make available the useful results thereof.','0207 012 6912','1 St. John\'s Lane, London EC1M 4AR','213890','Throughout England and Wales, Worldwide',2),(4,'Cancer Research UK','http://www.cancerresearchuk.org','To protect and promote the health of the public in particular by research into the nature, causes diagnosis, prevention, treatment and cure of all forms of cancer, including the development of research into practical applications for the prevention, treatment and cure of cancer and to provide information and raise public understanding of such matters.',' 020 7061 8394','61 Lincoln\'s Inn Fields London WC2A 3PX','1089464','Throughout England and Wales, Northern Irelan',5);
+/*!40000 ALTER TABLE `charities` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `charity_category`
+--
+
+DROP TABLE IF EXISTS `charity_category`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `charity_category` (
+  `category_id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(45) NOT NULL,
+  PRIMARY KEY  (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `charity_category`
+--
+
+LOCK TABLES `charity_category` WRITE;
+/*!40000 ALTER TABLE `charity_category` DISABLE KEYS */;
+INSERT INTO `charity_category` VALUES (1,'Arts & Culture'),(2,'Children'),(3,'Education'),(4,'Environment'),(5,'Health and medical'),(6,'Poverty relief'),(7,'Social development');
+/*!40000 ALTER TABLE `charity_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `contacts`
+--
+
+DROP TABLE IF EXISTS `contacts`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `contacts` (
+  `contact_id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(45) default NULL,
+  `title` varchar(45) default NULL,
+  `email` varchar(45) default NULL,
+  `phone` varchar(45) default NULL,
+  `address` text,
+  `charity_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`contact_id`),
+  KEY `fk_contacts_charities` (`contact_id`),
+  CONSTRAINT `fk_contacts_charities` FOREIGN KEY (`contact_id`) REFERENCES `charities` (`charity_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `contacts`
+--
+
+LOCK TABLES `contacts` WRITE;
+/*!40000 ALTER TABLE `contacts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `contacts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `donations`
+--
+
+DROP TABLE IF EXISTS `donations`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `donations` (
+  `donation_id` int(10) unsigned NOT NULL auto_increment,
+  `user_id` int(10) unsigned NOT NULL,
+  `amount` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY  (`donation_id`),
+  KEY `fk_donations_user` (`user_id`),
+  CONSTRAINT `fk_donations_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `donations`
+--
+
+LOCK TABLES `donations` WRITE;
+/*!40000 ALTER TABLE `donations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `donations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `history`
+--
+
+DROP TABLE IF EXISTS `history`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `history` (
+  `history_id` int(10) unsigned NOT NULL auto_increment,
+  `charity_id` int(10) unsigned NOT NULL,
+  `year` int(11) NOT NULL,
+  `revenue` int(11) default NULL,
+  `expense` int(11) default NULL,
+  PRIMARY KEY  (`history_id`),
+  KEY `fk_history_charities` (`charity_id`),
+  CONSTRAINT `fk_history_charities` FOREIGN KEY (`charity_id`) REFERENCES `charities` (`charity_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `history`
+--
+
+LOCK TABLES `history` WRITE;
+/*!40000 ALTER TABLE `history` DISABLE KEYS */;
+/*!40000 ALTER TABLE `history` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pie_slices`
+--
+
+DROP TABLE IF EXISTS `pie_slices`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `pie_slices` (
+  `slice_id` int(10) unsigned NOT NULL auto_increment,
+  `pie_id` int(10) unsigned NOT NULL,
+  `charity_id` int(10) unsigned default NULL,
+  `cause_id` int(10) unsigned default NULL,
+  `size` int(10) unsigned NOT NULL default '0',
+  `is_charity` tinyint(1) NOT NULL,
+  PRIMARY KEY  (`slice_id`),
+  KEY `fk_pie_slices_pies` (`pie_id`),
+  KEY `fk_pie_slices_charities` (`charity_id`),
+  KEY `fk_pie_slices_causes` (`cause_id`),
+  CONSTRAINT `fk_pie_slices_pies` FOREIGN KEY (`pie_id`) REFERENCES `pies` (`pie_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pie_slices_charities` FOREIGN KEY (`charity_id`) REFERENCES `charities` (`charity_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pie_slices_causes` FOREIGN KEY (`cause_id`) REFERENCES `causes` (`cause_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `pie_slices`
+--
+
+LOCK TABLES `pie_slices` WRITE;
+/*!40000 ALTER TABLE `pie_slices` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pie_slices` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pies`
+--
+
+DROP TABLE IF EXISTS `pies`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `pies` (
+  `pie_id` int(10) unsigned NOT NULL auto_increment,
+  `user_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`pie_id`),
+  KEY `fk_pies_user` (`user_id`),
+  CONSTRAINT `fk_pies_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `pies`
+--
+
+LOCK TABLES `pies` WRITE;
+/*!40000 ALTER TABLE `pies` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pies` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tags`
+--
+
+DROP TABLE IF EXISTS `tags`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `tags` (
+  `tag_id` int(10) unsigned NOT NULL,
+  `label` varchar(45) NOT NULL,
+  PRIMARY KEY  (`tag_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `tags`
+--
+
+LOCK TABLES `tags` WRITE;
+/*!40000 ALTER TABLE `tags` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tags` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `user` (
+  `user_id` int(10) unsigned NOT NULL auto_increment,
+  `username` varchar(45) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `facebook_id` varchar(45) default NULL,
+  `full_name` text,
+  `registered_date` date default NULL,
+  `dob` date default NULL,
+  `location` text,
+  PRIMARY KEY  (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2009-02-15 22:57:11
