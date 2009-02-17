@@ -12,10 +12,16 @@
         </select>
     </div>
     <div id="contents-main" class="grid_9">
-        <h2>Charities</h3>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.</p>
-		<h3>Other stuff</h3>
-		<p>And more text.</p>
+        <h2>Charities - <?php echo $this->category_info["name"] ?></h3>
+
+		<dl>
+<?php foreach ($this->charities as $charity) : ?>
+            <dt><a href="/charities/<?php echo $charity["charity_id"]; ?>"><?php echo $charity["name"] ?></a></dt>
+            <dd><?php echo $charity["description"] ?></dd>
+            <dd><a href="/charities/<?php echo $charity["charity_id"]; ?>">[ More info ]</a> <a href="/mypie/add/charity/<?php echo $charity["charity_id"];?>">[ Add to My Pie ]</a></dd>
+			<dd>&nbsp;</dd>
+<?php endforeach ?>
+		<dl>
     </div>
 
     <div class="clear">&nbsp;</div>

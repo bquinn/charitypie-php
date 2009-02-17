@@ -1,0 +1,40 @@
+<?php echo $this->menu('charities'); ?>
+<div id="contents" class="container_12">
+    <div id="contents-sidebar" class="grid_3">
+        <h3>Search</h3>
+        <input type="text" id="search" name="s" value="Enter keyword to search" />
+        <h3>Categories/Tags</h3>
+        <select id="category" onchange="location.href = '/charities/category/' + value;">
+            <option value="">Choose a category</option>
+<?php foreach ($this->charity_categories as $category) : ?>
+            <option value="<?php echo $category["category_id"] ?>"><?php echo $category["name"] ?></option>
+<?php endforeach ?>
+        </select>
+    </div>
+    <div id="contents-main" class="grid_9">
+        <h2>Charity Detail - <?php echo $this->charity["name"] ?></h3>
+
+		<dl>
+            <dt>Description</dt>
+            <dd><?php echo $this->charity["description"] ?></dd>
+			<dd>&nbsp;</dd>
+            <dt>Website</dt>
+            <dd><?php echo $this->charity["website"] ?></dd>
+			<dd>&nbsp;</dd>
+            <dt>Phone</dt>
+            <dd><?php echo $this->charity["phone"] ?></dd>
+			<dd>&nbsp;</dd>
+            <dt>Address</dt>
+            <dd><?php echo $this->charity["address"] ?></dd>
+			<dd>&nbsp;</dd>
+            <dt>Charities Commission registration number</dt>
+            <dd><?php echo $this->charity["registration"] ?></dd>
+			<dd>&nbsp;</dd>
+			<dd></dd>
+			<dd>... other stuff about finances, contacts etc ... </dd>
+			<dd><a href="/mypie/add/charity/<?php echo $this->charity["charity_id"] ?>">[ add to my pie ]</a></dd>
+		<dl>
+    </div>
+
+    <div class="clear">&nbsp;</div>
+</div>

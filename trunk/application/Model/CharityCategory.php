@@ -15,7 +15,7 @@
  * @see http://martinfowler.com/eaaCatalog/tableModule.html [Table Module]
  * @see http://martinfowler.com/eaaCatalog/ [See Domain Logic Patterns and Data Source Arch. Patterns]
  */
-class Model_Charity extends Model_Abstract {
+class Model_CharityCategory extends Model_Abstract {
 
  /**
   * Retrieve table object
@@ -25,50 +25,63 @@ class Model_Charity extends Model_Abstract {
   public function getTable() {
 	// the class variable $_table is defined in the abstract superclass
 	if (null === $this->_table) {
-	  $this->_table = new Model_DbTable_Charity;
+	  $this->_table = new Model_DbTable_CharityCategory;
 	}
 	return $this->_table;
   }
 
  /**
-  * Fetch an individual charity by site id
+  * Fetch an individual category by id
   *
-  * @param int|string $siteid
+  * @param int|string $id
   * @return null|Zend_Db_Table_Row_Abstract
   * @throws MyCharityPie_CharityDoesNotExistException
   */
-  public function fetchCharityById($charityid) {
+  public function fetchById($categoryid) {
 	$table = $this->getTable();
 	$select = $table->select()->setIntegrityCheck(false)
-						->from('charities')
-						->where('charity_id = ?', $charityid);
+						->from('charity_category')
+						->where('category_id = ?', $categoryid);
 	$result = $table->fetchRow($select);
 	if ($result) {
 		// hide the DB structure from the caller, only return an array
 		return $result->toArray();
 	} else {
-		throw new MyCharityPie_CharityDoesNotExistException("Charity ".$siteid." doesn't exist in the database.");
+		throw new MyCharityPie_CategoryDoesNotExistException("Category ".$siteid." doesn't exist in the database.");
 	}
   }
 
- /**
-  * Fetch an individual charity by site id
+  /* Fetch list of categories 
   *
-  * @param int|string $siteid
   * @return null|Zend_Db_Table_Row_Abstract
-  * @throws MyCharityPie_CharityDoesNotExistException
   */
-  public function fetchCharitiesByCategory($categoryid) {
+  public function fetchCategoryList() {
 	$table = $this->getTable();
 	$select = $table->select()->setIntegrityCheck(false)
-						->from('charities')
-						->where('category_id = ?', $categoryid);
-	$result = $table->fetchAll($select);
-	if ($result) {
-		// hide the DB structure from the caller, only return an array
-		return $result->toArray();
-	} else {
-		throw new MyCharityPie_CharityCategoryDoesNotExistException("Charity Category ".$categoryid." doesn't exist in the charities list.");
-	}
+						->from('charity_category')
+						->order(array('name ASC'));
+	$categories = $table->fetchAll($select);
+	$cats = $categories->toArray();
+	return $cats;
+  }
+
+  /* Fetch matching 
+  *
+  * @param int|string $id
+  * @return null|Zend_Db_Table_Row_Abstract
+  */
+  public function fetchItemsBySiteId($site_id) {
+	$table = $this->getTable();
+	$select = $table->select()->setIntegrityCheck(false)
+						->from('aggregation')
+						->where('aggregation.site_id = ?', $site_id)
+						->join('agg_feed', 'aggregation.id = agg_feed.agg_id')
+						->join('feed', 'agg_feed.feed_id = feed.id')
+						->join('item', 'feed.id = item.feed_id')
+						->order(array('item.item_pub_date DESC'));
+	$feeds = $table->fetchAll($select);
+	// hide the user from the DB rules
+	$items = $feeds->toArray();
+	return $items;
   }
 }
