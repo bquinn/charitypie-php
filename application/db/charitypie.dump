@@ -36,7 +36,7 @@ CREATE TABLE `cause_tags` (
   CONSTRAINT `fk_tag_causes` FOREIGN KEY (`tag_id`) REFERENCES `causes` (`cause_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_tag_causes1` FOREIGN KEY (`cause_id`) REFERENCES `causes` (`cause_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_cause_tag_tag` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`tag_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `causes` (
   KEY `fk_causes_pies` (`pie_id`),
   CONSTRAINT `fk_causes_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_causes_pies` FOREIGN KEY (`pie_id`) REFERENCES `pies` (`pie_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -98,7 +98,7 @@ CREATE TABLE `charities` (
   PRIMARY KEY  (`charity_id`),
   KEY `fk_charities_charity_category` (`category_id`),
   CONSTRAINT `fk_charities_charity_category` FOREIGN KEY (`category_id`) REFERENCES `charity_category` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -107,7 +107,56 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `charities` WRITE;
 /*!40000 ALTER TABLE `charities` DISABLE KEYS */;
-INSERT INTO `charities` VALUES (1,'Oxfam','http://www.oxfam.org.uk/','Oxfam\'s objects are for the prevention and relief of poverty anywhere in the world. Oxfam furthers its objects through three interlinked activities: humanitarian relief, development work and advocacy and campaigning. Oxfam is an affiliate member of Oxfam International. Details of Oxfam\'s mission and ways of working can be found at www.oxfam.org.uk','0870 333 2444','Oxfam, 2700 John Smith Drive, Oxford Business Park South, Oxford, OX4 2JY','202918','Throughout England and Wales, Worldwide',6),(2,'Barnardo\'s','http://www.barnardos.org.uk/','Barnardo\'s runs a wide variety of projects including: disability services; family centres; education, employment and training; fostering and adoption; youth justice; homelessness; safeguarding and protection and residential and leaving care services. We also campaign, bringing vital issues to the attention of the public and the government. We do this because we believe in children.','020 8550 8822','Barnardos Head Office, Tanners Lane, Barkingside, Ilford IG6 1QG','216250','Throughout England and Wales, Northern Irelan',7),(3,'The Save the Children Fund','http://www.savethechildren.org.uk/','To relieve the distress and to promote the welfare of children in any country or countries, without differentiation on the ground of race, colour, nationality, creed or sex to educate the public concerning the nature, causes and effects of distress, and want of welfare as aforesaid, and to conduct and procure research concerning the same and to make available the useful results thereof.','0207 012 6912','1 St. John\'s Lane, London EC1M 4AR','213890','Throughout England and Wales, Worldwide',2),(4,'Cancer Research UK','http://www.cancerresearchuk.org','To protect and promote the health of the public in particular by research into the nature, causes diagnosis, prevention, treatment and cure of all forms of cancer, including the development of research into practical applications for the prevention, treatment and cure of cancer and to provide information and raise public understanding of such matters.',' 020 7061 8394','61 Lincoln\'s Inn Fields London WC2A 3PX','1089464','Throughout England and Wales, Northern Irelan',5);
+INSERT INTO charities (charity_id,name,website,description,phone,address,registration,operating_location,category_id)
+	VALUES
+	(1, 'Oxfam', 'http://www.oxfam.org.uk',
+	 'Oxfam''s objects are for the prevention and relief of poverty anywhere in the world. Oxfam furthers its objects through three interlinked activities: humanitarian relief, development work and advocacy and campaigning. Oxfam is an affiliate member of Oxfam International.',
+	 '555-555-555', '2700 John Smith Drive, Oxford, OX4 2JY', '202918',
+	 'United Kingdom', 6),
+	(2, 'Save The Children Fund', 'http://www.savethechildren.org.uk',
+	 'To relieve the distress and to promote the welfare of children in any country or countries, without differentiation on the ground of race, colour, nationality, creed or sex to educate the public concerning the nature, causes and effects of distress, and want of welfare as aforesaid, and to conduct and procure research concerning the same and to make available the useful results thereof.',
+	 '555-555-555', '1 St. John''s Lane, London, EC1M 4AR', '213890',
+	 'United Kingdom', 4),
+	(3, 'Barnado''s', 'http://www.barnandos.org.uk',
+	 'Barnando''s runs a wide variety of projects including: disability services; family centres; education, employment and training; fostering and adoption; youth justice; homelessness; safeguarding and protection and residential and leaving care services. We also campaign, bringing vital issues to the attention of the public and the government. We do this because we believe in children.',
+	 '555-555-555', 'Tanners Lane, Barkingside, Ilford, IG6 1QG', '216250',
+	 'United Kingdom', 4),
+	(4, 'Cancer Research UK', 'http://www.cancerresearchuk.org',
+	 'To protect and promote the health of the public in particular by research into the nature, causes diagnosis, prevention, treatment and cure of all forms of cancer, including the development of research into practical applications for the prevention, treatment and cure of cancer and to provide information and raise public understanding of such matters',
+	 '555-555-555', '61 Lincoln''s Inn Fields London, WC2A 3PX', '1089464',
+	 'United Kingdom', 5),
+	(5,'Age Concern London', 'http://www.aclondon.org.uk',
+	 'Age Concern London works across the capital to improve the quality of life for older people and to enhance their status and influence. A regional body, it promotes issues of importance to older people in London, and works in partnership with Age Concern organisations across London. Age Concern London is an independent organisation within the nationwide Age Concern federation. Donations, covenants and legacies are vital to its work.',
+	 '555-555-555', '21 St. Georges Road (CC), SE1 6ES', '1092198',
+	 'United Kingdom', 1),
+	(6, 'WWF-UK', 'http://www.wwf.org.uk',
+	 'WWF is one of the world''s leading conservation organisations, working to create a lasting harmony between humans and the natural world. As part of the international WWF network, WWF-UK addresses global threats to people and nature such as climate change, the peril to endangered species and habitats, and the unsustainable consumption of the world''s natural resources. We do this by influencing how governments, businesses and people think, learn and act in relation to the world around us, and by working with local communities to improve their livelihoods and the environment upon which we all depend. WWF uses its practical experience, knowledge and credibility to create long-term solutions for the planet''s environment. The funding we receive from legacies is a vital element of our work, giving us the mechanism to channel conservation work where it is most needed, and achieve these long-term goals.',
+	 '555-555-555', 'Panda House Weyside Park, Godalming , Surrey, GU7 1XR', '1081247',
+	 'United Kingdom', 2),
+	(7, 'WSPA - World Society for the Protection of Animals', 'http://www.wspa.org.uk',
+	 'The World Society for the Protection of Animals is working internationally to end the exploitation and suffering of animals. Through humane education, campaigning against cruelty and animal rescue, WSPA''s aim is to ensure that the principles of animal welfare are universally understood, respected and protected by effectively enforced legislation. WSPA works with over 400 member organisations in more than 100 countries in order to achieve this, making us the most widespread animal welfare charity in the world.',
+	 '555-555-555', '89 Albert Embankment, London, SE1 7TP', '1081849',
+	 'United Kingdom', 2),
+	(8, 'The Guide Dogs for the Blind Association', 'http://www.guidedogs.org.uk',
+	 'Since 1934 Guide Dogs has transformed the lives of thousands of blind and partially sighted people through the provision of guide dogs, mobility and other rehabilitation services. Life takes on a whole new meaning when a visually impaired person trains with a guide dog. They can get out and about when and where they want, without having to rely on friends and family. Guide Dogs main work is, and always will be, the training and provision of guide dogs. But we also provide a huge range of other services for blind and partially sighted people. These include long cane training, and help with daily living skills. Guide Dogs are also one of the UK''s largest contributors to research into ophthalmic disease.',
+	 '555-555-555', 'Burghfield Common, Reading, RG7 3YG', '209617',
+	 'United Kingdom', 3),
+	(9, 'Action for Children', 'http://www.actionforchildren.org.uk',
+	 'We help nearly 170,000 children, young people and their families through nearly 450 projects across the UK. We also promote social justice by lobbying and campaigning for change',
+	 '555-555-555', '85 Highbury Park, London, N5 1UD', '1097940',
+	 'United Kingdom', 4),
+	(10, 'CHASE Hospice Care for Children', 'http://www.chasecare.org.uk',
+	 'CHASE provides a network of care for life-limited young people and their families living in South West London, Surrey and Sussex through our children''s hospice, Christopher''s, and a home- and community-based care service',
+	 '555-555-555', 'Loseley Park,Guildford, Surrey, GU3 1HS', '1042495',
+	 'United Kingdom', 4),
+	(11, 'British Heart Foundation', 'http://www.bhf.org.uk',
+	 'The British Heart Foundation plays a vital role in funding pioneering heart research in the UK, it provides support and care for heart patients and information to help people reduce their own risk of dying prematurely from a heart or circulatory related illness',
+	 '555-555-555', 'Greater London House, 180 Hampstead Road, London, NW1 7AW', '225971',
+	 'United Kingdom', 5),
+	(12, 'National Osteoporosis Society ', 'http://www.nos.org.uk',
+	 'The society''s main activities are as follows:charitable activities, services to members, support groups and the general public. The Society is also has active in research, policy and education and awareness.',
+	 '555-555-555', 'Camerton, Bat, BA2 0PJ', '1102712',
+	 'United Kingdom', 5);
 /*!40000 ALTER TABLE `charities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +171,7 @@ CREATE TABLE `charity_category` (
   `category_id` int(10) unsigned NOT NULL auto_increment,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY  (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -131,7 +180,13 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `charity_category` WRITE;
 /*!40000 ALTER TABLE `charity_category` DISABLE KEYS */;
-INSERT INTO `charity_category` VALUES (1,'Arts & Culture'),(2,'Children'),(3,'Education'),(4,'Environment'),(5,'Health and medical'),(6,'Poverty relief'),(7,'Social development');
+INSERT INTO `charity_category` (category_id, name) VALUES
+	(1, 'Aged'),
+	(2, 'Animals'),
+	(3, 'Blind & Partially Sighted'),
+	(4, 'Children and Youth'),
+	(5, 'Health'),
+	(6, 'Overseas Aid');
 /*!40000 ALTER TABLE `charity_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,7 +208,7 @@ CREATE TABLE `contacts` (
   PRIMARY KEY  (`contact_id`),
   KEY `fk_contacts_charities` (`contact_id`),
   CONSTRAINT `fk_contacts_charities` FOREIGN KEY (`contact_id`) REFERENCES `charities` (`charity_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -180,7 +235,7 @@ CREATE TABLE `donations` (
   PRIMARY KEY  (`donation_id`),
   KEY `fk_donations_user` (`user_id`),
   CONSTRAINT `fk_donations_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -208,7 +263,7 @@ CREATE TABLE `history` (
   PRIMARY KEY  (`history_id`),
   KEY `fk_history_charities` (`charity_id`),
   CONSTRAINT `fk_history_charities` FOREIGN KEY (`charity_id`) REFERENCES `charities` (`charity_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -241,7 +296,7 @@ CREATE TABLE `pie_slices` (
   CONSTRAINT `fk_pie_slices_pies` FOREIGN KEY (`pie_id`) REFERENCES `pies` (`pie_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_pie_slices_charities` FOREIGN KEY (`charity_id`) REFERENCES `charities` (`charity_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_pie_slices_causes` FOREIGN KEY (`cause_id`) REFERENCES `causes` (`cause_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -266,7 +321,7 @@ CREATE TABLE `pies` (
   PRIMARY KEY  (`pie_id`),
   KEY `fk_pies_user` (`user_id`),
   CONSTRAINT `fk_pies_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -289,7 +344,7 @@ CREATE TABLE `tags` (
   `tag_id` int(10) unsigned NOT NULL,
   `label` varchar(45) NOT NULL,
   PRIMARY KEY  (`tag_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -319,7 +374,7 @@ CREATE TABLE `user` (
   `dob` date default NULL,
   `location` text,
   PRIMARY KEY  (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
