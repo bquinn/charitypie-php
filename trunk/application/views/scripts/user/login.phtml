@@ -5,6 +5,6 @@
 <?php echo $this->form ?>
 <div class="spacer">&nbsp;</div>
 <div class="spacer">&nbsp;</div>
-<p class="info" align="center">Don't have an account yet? <a href="/user/register/">Create an account</a><br />
-Forgot your password? <a href="/user/resetpassword/">Have it re-sent</a></p>
+<p class="info" align="center">Don't have an account yet? <a href="<?php print $this->url(array('controller'=>'user','action'=>'register'),'default') ?>">Create an account</a><br />
+Forgot your password? <a href="<?php print $this->url(array('controller'=>'user','action'=>'resetpassword'),'default') ?>">Have it re-sent</a></p>
 </div>

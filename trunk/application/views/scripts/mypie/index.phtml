@@ -1,25 +1,17 @@
-<?php echo $this->menu('mypie'); ?>
-<div id="contents" class="container_12">
-    <div id="contents-sidebar" class="grid_3">
-        <h3>Search</h3>
-        <input type="text" id="search" name="s" value="Enter keyword to search" />
-        <h3>Categories/Tags</h3>
-        <select id="category">
-            <option>Category 1 (2)</option>
-            <option>Category 2 (23)</option>
-            <option>Category 3 (4)</option>
-            <option>Category 4 (12)</option>
-            <option>Category 5 (5)</option>
-            <option>Category 6 (13)</option>
-            <option>Category 7 (16)</option>
-        </select>
-    </div>
-    <div id="contents-main" class="grid_9">
-        <h2>My Pie</h3>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.</p>
-		<h3>Other stuff</h3>
-		<p>And more text.</p>
-    </div>
 
-    <div class="clear">&nbsp;</div>
+<h2>My Pie</h3>
+<p>You pie has <?php print $this->slices_count ?>/10 slices</p>
+  <?php
+  foreach ($this->pie_slices as $slice) {
+    ?>
+    <h3><?php print $slice['recipient_name'] ?></h3>
+    <p><a href="<?php print $this->url(array('sliceid'=>$slice['slice_id']),'deleteslice') ?>">remove from MyPie</a>
+    <?php
+  }
+  ?>
 </div>
+
+<h3>My Causes</h3>
+<?php print $this->cause_form ?>
+
+<div class="clear">&nbsp;</div>
