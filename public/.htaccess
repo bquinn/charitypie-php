@@ -2,11 +2,11 @@
 # in their own folder, this sets params for the whole web server!
 # so we need to limit access ourselves here.
 
-	RewriteEngine On
+  RewriteEngine On
 
-	RewriteCond %{REQUEST_FILENAME} -s [OR]
-	RewriteCond %{REQUEST_FILENAME} -l [OR]
-	RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_FILENAME} -s [OR]
+  RewriteCond %{REQUEST_FILENAME} -l [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
 
-	RewriteRule ^.*$ - [NC,L]
-	RewriteRule ^.*$ /index.php [NC,L]
+  RewriteRule ^.*$ - [NC,L]
+  RewriteRule ^.*$ index.php [NC,L]
