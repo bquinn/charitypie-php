@@ -1,9 +1,12 @@
 <?php
+ define('APPLICATION_ENVIRONMENT','nathan');
+ //define('APPLICATION_ENVIRONMENT','tony');
+
  // Step 1: APPLICATION_PATH is a constant pointing to our
  // application/subdirectory. We use this to add our "library" directory
  // to the include_path, so that PHP can find our Zend Framework classes.
  define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application/'));
- define('APPLICATION_ENVIRONMENT','tony');
+ 
  set_include_path( APPLICATION_PATH . '/../library' . PATH_SEPARATOR . get_include_path() );
  set_include_path( APPLICATION_PATH . PATH_SEPARATOR . get_include_path() );
 
