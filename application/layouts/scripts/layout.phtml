@@ -4,49 +4,72 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>myCharityPie: many charities, one donation</title>
-  <?php echo $this->headLink()->appendStylesheet('/css/reset.css') ?>
-  <?php echo $this->headLink()->appendStylesheet('/css/text.css') ?>
-  <?php echo $this->headLink()->appendStylesheet('/css/960.css') ?>
-  <?php echo $this->headLink()->appendStylesheet('/css/site.css') ?>
-  <?php echo $this->headLink()->appendStylesheet('/css/global.css') ?>
+  <?php echo $this->headLink()->appendStylesheet('css/style.css') ?>
 </head>
 <body class="body-charities">
-<div id="topbar">
 
-<div class="container_12">
-    <div id="utility-links" class="grid_10">
-		<a href="/about/">About</a>
-	</div>
-    <div id="utility-user" class="grid_2">
-		<?php echo $this->profileLink(); ?>
-	</div>
-    <div class="clear"></div>
-	</div>
-</div>
-<div id="header" class="container_12">
-	<div id="header-logo" class="grid_6">
-		<a href="/"><img src="/img/logo.jpg" width="408" height="134" border="0" alt="myCharityPie" /></a>
-	</div>
-	<div id="header-description" class="grid_6">
-        <h2>One donation, many charities</h2>
-        <p>Find your favourite charities. Discover new charities.<br />
-		See your friends' favourite charities.<br />
-		Put them all together to make your own CharityPie.<br />
-		Make a cause of your selected charities.<br />
-		Share them with your friends!</p>
+<div id="topbar">
+    <div id="utilities">
+        <div id="utility-links">
+			<a href="/about/">About</a>
+		</div>
+        <div id="utility-user">
+			<?php echo $this->profileLink(); ?>
+		</div>
+        <br class="clear" />
     </div>
-    <div class="clear">&nbsp;</div>
 </div>
+
+<div id="container">
+
+<div id="header">
+	<div id="logo">
+		<p>
+			<a href="#" title="Back to Home"><img src="<?php print $this->baseurl() ?>/img/logo.jpg" /></a>
+		</p>
+	</div>
+	<div id="description">
+		<h2>One donation, many charities</h2>
+		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.</p>
+	</div>
+</div>
+
+<ul id="nav">
+    <li id="nav-charities"><a href="<?php print $this->url(array('controller'=>'charities'),'default',true) ?>" title="View charities">Charities</a></li>
+    <li id="nav-causes"><a href="<?php print $this->url(array('controller'=>'causes'),'default',true) ?>" title="View causes">Causes</a></li>
+    <li id="nav-mypie"><a href="<?php print $this->url(array('controller'=>'mypie'),'default',true) ?>" title="View my pie">My Pie</a></li>
+</ul>
+
+<div id="contents">
+
+  <?php $this->searchsidebar(); ?>
+	<?php $action_url = $this->url(array(),'charities',true); ?>
+  <div id="sidebar">
+    	<h3>Search</h3>
+        <form method="post" action="<?php print $action_url ?>">
+            <input type="hidden" name="listMethod" value="search" />
+            <input type="text" id="search" name="s" valuex="Enter keyword to search" onfocus="javascript:if (this.value=='Enter keyword to search') this.value='';" onblur="javascript:if (this.value=='') this.value='Enter keyword to search';" />
+			<input type="submit" value="Search" />
+        </form>
+    	<h3>Categories</h3>
+        <form method="post" action="<?php print $action_url ?>">
+            <input type="hidden" name="listMethod" value="select" />
+            <select name="tag_id" id="category">
+			<?php
+				foreach ($this->charity_tags as $tag) {
+					print('<option value="'.$tag['tag_id'].'">'.$tag['label'].' ('.$tag['charities'].')</option>');
+				}
+			?>
+            </select>
+			<input type="submit" value="Search" />
+        </form>
+	</div>
 
 	<?php echo $this->layout()->content ?>
-
-<div id="footer-container" class="container_12">
- 	<div id="footer" class="grid_12">
-		<p class="copyright">
-			<a href="/about/">About</a> | <a href="/about/terms/">Terms &amp; Conditions</a> | <a href="/about/privacy/">Privacy policy</a> | <a href="/about/contact/">Contact Us</a>
-		</p>
-		<p class="copyright">&copy; 2009 myCharityPie</p>
-	</div>
+	
+	<br class="clear" />
+</div>
+<div id="footer">Footer</div>
 </div>
 </body>
-</html> 
+</html>

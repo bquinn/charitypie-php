@@ -1,22 +1,9 @@
-<?php echo $this->menu('charities'); ?>
-<div id="contents" class="container_12">
-    <div id="contents-sidebar" class="grid_3">
-        <h3>Search</h3>
-        <input type="text" id="search" name="s" value="Enter keyword to search" />
-        <h3>Categories/Tags</h3>
-        <select id="category" onchange="location.href = '/charities/category/' + value;">
-            <option value="">Choose a category</option>
-<?php foreach ($this->charity_categories as $category) : ?>
-            <option value="<?php echo $category["category_id"] ?>"><?php echo $category["name"] ?></option>
-<?php endforeach ?>
-        </select>
-    </div>
-    <div id="contents-main" class="grid_9">
-        <h2>Charities</h3>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.</p>
-		<h3>Other stuff</h3>
-		<p>And more text.</p>
-    </div>
-
-    <div class="clear">&nbsp;</div>
-</div>
+	<div id="mainContent">
+    	<h3>Charities</h3>
+		<p><?php print($this->list_title) ?></p>
+		<?php
+			foreach ($this->charities as $charity) {
+				print('<p><a href="'.$this->url().'/'.$charity['charity_id'].'">'.$charity['name'].'</a><br />'.$charity['description'].'</p>');
+			}
+		?>
+	</div>

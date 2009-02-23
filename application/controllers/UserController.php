@@ -14,7 +14,7 @@ class UserController extends Zend_Controller_Action
 	public function getLoginForm()
 	{
 		return new Forms_User_LoginForm(array(
-			'action' => '/user/processlogin',
+			'action' => 'processlogin',
 			'method' => 'post',
 		));
 	}
@@ -22,7 +22,7 @@ class UserController extends Zend_Controller_Action
 	public function getRegisterForm()
 	{
 		return new Forms_User_RegisterForm(array(
-			'action' => '/user/processregister',
+			'action' => 'processregister',
 			'method' => 'post',
 		));
 	}
@@ -103,7 +103,7 @@ class UserController extends Zend_Controller_Action
 				if ($form->getValue('redirect_to')) {
 					$this->_redirect($form->getValue('redirect_to'));
 				} else {
-					$this->_helper->redirector('index', 'index');
+					$this->_helper->redirector('index', 'mypie');
 				}
 				break; // should never get here
 

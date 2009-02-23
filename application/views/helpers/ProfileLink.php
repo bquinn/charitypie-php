@@ -24,12 +24,13 @@ class My_View_Helper_ProfileLink extends Zend_View_Helper_Abstract
 			$this->view->user = $user;
 			// I feel like this stuff should really be
 			// in a view template somewhere...
-			return '<a href="/profile/' . $this->view->user['username'] . '/">Welcome, ' . $this->view->user['username'] .  '</a>' .
-		' | <a href="/user/logout/">Logout</a>';
+			return '<a href="'.$this->view->url(array('profileid'=>$this->view->user['email']),'profile').'">Welcome, '.$this->view->user['email'].'</a>' .
+		         ' | <a href="'.$this->view->url(array('controller'=>'user','action'=>'logout'),'default').'">Logout</a>';
 		} else {
-			return '<a href="/user/register/">Register</a>'
+			return
+         '<a href="'.$this->view->url(array('controller'=>'user','action'=>'register'),'default').'">Register</a>'
 				.' | '
-				.'<a href="/user/login/">Login</a>';
+				.'<a href="'.$this->view->url(array('controller'=>'user','action'=>'login'),'default').'">Login</a>';
 		}
 	}
 

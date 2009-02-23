@@ -6,6 +6,6 @@
 <div class="spacer"></div>
 </div>
 <div>
-<p>Already have an account? <a href="/user/login/">Just login</a></p>
-<p>Forgot your password? <a href="/user/forgotpassword/">Have it re-sent</a></p>
+<p>Already have an account? <a href="<?php print $this->url(array('controller'=>'user','action'=>'login'),'default') ?>">Just login</a></p>
+<p>Forgot your password? <a href="<?php print $this->url(array('controller'=>'user','action'=>'forgotpassword'),'default') ?>">Have it re-sent</a></p>
 </div>
