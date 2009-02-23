@@ -5,8 +5,13 @@
  // isn't index.php (e.g., if required from our test suite or a script).
  defined('APPLICATION_PATH')
    or define('APPLICATION_PATH', dirname(__FILE__));
+ //defined('APPLICATION_ENVIRONMENT')
+ //  or define('APPLICATION_ENVIRONMENT', 'development');
  defined('APPLICATION_ENVIRONMENT')
-   or define('APPLICATION_ENVIRONMENT', 'development');
+    || define('APPLICATION_ENVIRONMENT',
+        isset($_SERVER['APPLICATION_ENVIRONMENT'])
+        ? $_SERVER['APPLICATION_ENVIRONMENT']
+        : 'production');
 
  // CONFIGURATION - Setup the configuration object
  // The Zend_Config_Ini component will parse the ini file, and resolve all of
