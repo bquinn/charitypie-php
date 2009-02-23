@@ -18,7 +18,7 @@
 --
 -- Table structure for table `cause_label`
 --
-
+USE charitypie;
 DROP TABLE IF EXISTS `cause_label`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
