@@ -27,7 +27,7 @@ class MyPieController extends Zend_Controller_Action {
 		}
 		return $this->_userModel;
 	}
-  	protected function _getCauseModel() {
+  protected function _getCauseModel() {
 		if (null == $this->_causeModel) {
 			require_once APPLICATION_PATH . '/Model/DbTable/Cause.php';
 			$this->_causeModel = new Model_DbTable_Cause();
@@ -59,25 +59,33 @@ class MyPieController extends Zend_Controller_Action {
   }
   
   public function indexAction() {
+    $user = $this->getUserId();
+    $pieId = $this->getUserPieId();
+
     $slices = array();
     $count = 0;
-    
-    $pieId = $this->getUserPieId();
     if ($pieId) {
       $count = $this->_getSliceModel()->getPieSlicesCount($pieId);
       $slices = $this->_getSliceModel()->getPieSlices($pieId);
     }
-    
+
+    $causes = null;
+    if ($user) {
+      $causes = $this->_getCauseModel()->fetchAll('user_id = '.$user)->toArray();
+    }
+
+    $this->view->causes = $causes;
     $this->view->slices_count = $count;
     $this->view->pie_slices = $slices;
     $this->view->cause_form = $this->getCreateCauseForm();
   }
 
-  public function addcharityAction() {
+  public function addsliceAction() {
     $pieId = $this->getUserPieId();
-    $charityId = $this->_getParam('charityid');
+    $type  = strtoupper($this->_getParam('recipientType'));
+    $charityId = $this->_getParam('recipientId');
     if ($pieId) {
-      $this->_getSliceModel()->addSlice($pieId,$charityId,'CHARITY');
+      $this->_getSliceModel()->addSlice($pieId,$charityId,$type);
     }
     $this->getHelper(redirector)->direct('index');
   }
@@ -89,7 +97,28 @@ class MyPieController extends Zend_Controller_Action {
   }
 
   public function createcauseAction() {
+    if (!$this->getRequest()->isPost()) {
+      return $this->_forward('index');
+    }
 
+    $form = $this->getCreateCauseForm();
+
+    if (!$form->isValid($_POST)) {
+      $this->view->form = $form;
+      return $this->render('form');
+    }
+
+    $userId = $this->getUserId();
+    $posted = $form->getValues();
+
+    if (!$userId) {
+      return $this->getHelper(redirector)->direct('index');
+    }
+
+    $causeId = $this->_getCauseModel()->create($posted['name'],$userId);
+    $pieId   = $this->_getModel()->createPie($causeId,'CAUSE');
+
+    $this->getHelper(redirector)->direct('index');
   }
 
   public function getCreateCauseForm() {
