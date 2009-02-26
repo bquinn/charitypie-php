@@ -72,7 +72,7 @@
  // commonly one of development, staging, testing, production, but wholly
  // dependent on your organization's and/or site's needs.
  $frontController->setParam('env', APPLICATION_ENVIRONMENT);
-
+ 
  // LAYOUT SETUP - Setup the layout component
  // The Zend_Layout component implements a composite (or two-step-view) pattern
  // With this call we are telling the component where to find the layouts scripts.
