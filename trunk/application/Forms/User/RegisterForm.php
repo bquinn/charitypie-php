@@ -72,7 +72,7 @@ class Forms_User_RegisterForm extends Zend_Form {
 		'description' => 'If you can\'t read the words, press the refresh button in the ReCaptcha box to get a new pair of words. Thanks for helping universities to digitize books!',
 	));
 	$captcha->addDecorator('HtmlTag', array('tag' => 'dd', 'class' => 'recaptcha'));
-	$this->addElement($captcha);
+	//$this->addElement($captcha);
 
 	// register button
 	$register = $this->addElement('button', 'register', array(

@@ -3,6 +3,8 @@
 class UserController extends Zend_Controller_Action
 {
 	protected $_model;
+  protected $_pieModel;
+  protected $_sliceModel;
 
 	protected function _getModel() {
 		if (null == $this->_model) {
@@ -10,7 +12,18 @@ class UserController extends Zend_Controller_Action
 		}
 		return $this->_model;
 	}
-
+  protected function _getPieModel() {
+    if (null === $this->_pieModel) {
+      $this->_pieModel = new Model_DbTable_Pie();
+    }
+    return $this->_pieModel;
+  }
+  protected function _getSliceModel() {
+    if (null === $this->_sliceModel) {
+      $this->_sliceModel = new Model_DbTable_Slice();
+    }
+    return $this->_sliceModel;
+  }
 	public function getLoginForm()
 	{
 		return new Forms_User_LoginForm(array(
@@ -142,9 +155,19 @@ class UserController extends Zend_Controller_Action
 		} else {
 			// Valid form
 			$model = $this->_getModel();
-			$model->save($form->getValues());
+			$userId = $model->save($form->getValues());
 			// save throws an exception if it doesn't work, so we can assume it did (I think)
 
+      // AUTO CREATE A PIE
+      $data = array(
+        'owner_type'=>'USER',
+        'owner_id'=>$userId
+      );
+      $pieId = $this->_getPieModel()->insert($data);
+
+      // SAVE THE TEMPORARY PIE
+      $this->_getSliceModel()->saveSlicesToPie('new',$pieId);
+      
 			// the auth adapter doesn't log in the new user automatically, so
 			// we call it explicitly here (*almost* the same code as in
 			// processloginAction above so we probably should abstract some

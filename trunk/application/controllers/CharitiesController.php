@@ -1,6 +1,9 @@
 <?php
  /**
   * CharitiesController
+  *
+  * Authors: nathan@yura.net
+  * Date:    26/02/09
   */
 class CharitiesController extends Zend_Controller_Action {
   protected $_model;

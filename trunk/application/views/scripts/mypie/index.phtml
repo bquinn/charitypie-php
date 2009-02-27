@@ -1,12 +1,31 @@
 
+<?php if (!empty($this->messages)) { ?>
+<h1><?php print_r ($this->messages) ?></h1>
+<?php } ?>
+
 <h2>My Pie</h3>
 <p>You pie has <?php print $this->slices_count ?>/10 slices</p>
   <?php
-  foreach ($this->pie_slices as $slice) {
-    ?>
-    <h3><?php print $slice['recipient_name'] ?></h3>
-    <p><a href="<?php print $this->url(array('sliceid'=>$slice['slice_id']),'deleteslice') ?>">remove from MyPie</a>
-    <?php
+  if ($this->slice_changes) {
+    if ($this->user()) {
+    ?><p>Your latest changes have not been saved.
+      <a href="<?php print $this->url(array('action'=>'savepie','controller'=>'mypie'),'default') ?>">Save</a> or
+      <a href="<?php print $this->url(array('action'=>'reloadpie','controller'=>'mypie'),'default') ?>">Disgard</a>.</p><?php
+    } else {
+      ?>You need to <a href="<?php print $this->url(array('controller'=>'user','action'=>'register'),'default') ?>">register</a> to save your pie<?php
+    }
+
+  }
+
+  if (empty($this->pie_slices)) {
+    print "no slices";
+  } else {
+    foreach ($this->pie_slices as $slice) {
+      ?>
+      <h3><?php print $slice['recipient_name'] ?></h3>
+      <p><a href="<?php print $this->url(array('sliceid'=>$slice['slice_id']),'deleteslice',true) ?>">remove from MyPie</a>
+      <?php
+    }
   }
   ?>
 </div>
