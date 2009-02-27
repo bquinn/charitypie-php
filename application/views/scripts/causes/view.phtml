@@ -1,0 +1,27 @@
+<h3>CAUSE :: <a href="<?php print $this->url(array('recipientType'=>'cause','recipientId'=>$this->cause['cause_id']),'addslice',true) ?>">Add to my pie</a></h3>
+<?php print_r ($this->cause); ?>
+<h3>SLICES</h3>
+<?php
+if ($this->slice_changes) {
+  ?><p>Your latest changes have not been saved. 
+    <a href="<?php print $this->url(array('causeid'=>$this->cause['cause_id'],'action'=>'savepie'),'viewcause') ?>">Save</a> or
+    <a href="<?php print $this->url(array('causeid'=>$this->cause['cause_id'],'action'=>'reloadpie'),'viewcause') ?>">Disgard</a>.</p><?php
+}
+
+if (empty($this->slices)) {
+  ?>There are no pie slices<?php
+} else {
+  foreach ($this->slices as $slice) { ?>
+  <?php print_r ($slice);
+
+  if ($this->owner) { ?>
+    <a href="<?php print $this->url(array('sliceid'=>$slice['slice_id']),'deleteslice') ?>">remove from cause</a><br/>
+  <?php }
+  
+  }
+}
+?>
+<?php if ($this->user('id') == $this->cause['user_id']) { ?>
+<h3>This is your cause!</h3>
+<?php print $this->edit_form ?>
+<?php } ?>
