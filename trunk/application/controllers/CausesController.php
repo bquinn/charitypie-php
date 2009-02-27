@@ -121,6 +121,7 @@ class CausesController extends Zend_Controller_Action {
       $slices = $this->_getSliceModel()->getPieSlices($pieId);
     }
 
+    $this->view->pieId     = $pieId;
     $this->view->owner     = $this->_isUserOwner($causeId);
     $this->view->edit_form = $this->_getEditForm($causeId);
     $this->view->slices    = $slices;

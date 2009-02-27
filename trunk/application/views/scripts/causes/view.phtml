@@ -7,7 +7,19 @@ if ($this->slice_changes) {
     <a href="<?php print $this->url(array('causeid'=>$this->cause['cause_id'],'action'=>'savepie'),'viewcause') ?>">Save</a> or
     <a href="<?php print $this->url(array('causeid'=>$this->cause['cause_id'],'action'=>'reloadpie'),'viewcause') ?>">Disgard</a>.</p><?php
 }
+?>
 
+<script type="text/javascript" src="<?php print $this->baseUrl() ?>/flash/version-2/js/swfobject.js"></script>
+<script type="text/javascript">
+swfobject.embedSWF(
+  "<?php print $this->baseUrl() ?>/flash/version-2/open-flash-chart.swf", "my_chart", "550", "200",
+  "9.0.0","expressInstall.swf",
+  {"data-file":"<?php print $this->url(array('dataid'=>$this->pieId,'action'=>'load','controller'=>'pie'),'data') ?>"}
+  );
+</script>
+<div id="my_chart"></div>
+
+<?php
 if (empty($this->slices)) {
   ?>There are no pie slices<?php
 } else {

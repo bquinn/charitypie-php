@@ -42,7 +42,7 @@ class Model_DbTable_Slice extends Zend_Db_Table_Abstract {
     // Check for existing slice
     if ($slices && (!empty($slices))) {
       foreach ($slices as $slice) {
-        if (($slice['type'] == $type) &&
+        if (($slice['recipient_type'] == $type) &&
             ($slice['recipient_id'] == $recipientId)) {
             $slice_id = $slice['slice_id'];
         }
