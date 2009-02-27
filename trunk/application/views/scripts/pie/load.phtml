@@ -1,0 +1,28 @@
+{
+
+  "title":{
+    "text":"My Charity Pie!",
+    "style":"{font-size: 30px;}"
+  },
+
+  "elements":[
+    {
+      "type":      "pie",
+      "colours":   ["#d01f3c","#356aa0","#C79810"],
+      "alpha":     0.6,
+      "border":    2,
+      "animate":   0,
+      "start-angle": 35,
+      "values" :   [
+<?php
+$i = 0;
+foreach ($this->slices as $slice) {
+  if ($i > 0) print ',';
+  ?>{"value":50,"label":"<?php print $slice['recipient_name'] ?>"}<?php
+  $i++;
+}
+?>
+      ]
+    }
+  ]
+}

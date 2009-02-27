@@ -143,6 +143,7 @@ class MyPieController extends Zend_Controller_Action {
 
     $causes = $this->getUserCauses();
 
+    $this->view->pieId = $pieId;
     $this->view->causes = $causes;
     $this->view->slices_count = $count;
     $this->view->slice_changes = $this->_getSliceModel()->hasPieChanged($pieId);
