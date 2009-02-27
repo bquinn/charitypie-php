@@ -18,7 +18,7 @@
 --
 -- Table structure for table `cause_label`
 --
-USE charitypie;
+
 DROP TABLE IF EXISTS `cause_label`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
@@ -59,7 +59,7 @@ CREATE TABLE `causes` (
   PRIMARY KEY  (`cause_id`),
   KEY `fk_causes_user` (`user_id`),
   CONSTRAINT `fk_causes_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -68,6 +68,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `causes` WRITE;
 /*!40000 ALTER TABLE `causes` DISABLE KEYS */;
+INSERT INTO `causes` VALUES (1,'F',NULL,2),(2,'Foo','Because foo is important',2),(3,'My Green Pie',NULL,3),(4,'Fish Pie',NULL,3),(5,'Chimps',NULL,7);
 /*!40000 ALTER TABLE `causes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -231,7 +232,7 @@ CREATE TABLE `pie_slices` (
   UNIQUE KEY `unique_slice` (`pie_id`,`recipient_id`,`recipient_type`),
   KEY `fk_pie_slices_pies` (`pie_id`),
   CONSTRAINT `fk_pie_slices_pies` FOREIGN KEY (`pie_id`) REFERENCES `pies` (`pie_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -240,7 +241,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `pie_slices` WRITE;
 /*!40000 ALTER TABLE `pie_slices` DISABLE KEYS */;
-INSERT INTO `pie_slices` VALUES (7,1,0,4,'CHARITY'),(8,1,0,1,'CHARITY'),(9,3,0,8,'CHARITY'),(10,2,0,1,'CHARITY');
+INSERT INTO `pie_slices` VALUES (7,1,0,4,'CHARITY'),(8,1,0,1,'CHARITY'),(20,5,0,2,'CAUSE'),(23,6,0,2,'CHARITY'),(31,4,0,1,'CHARITY'),(32,4,0,2,'CHARITY'),(33,2,0,1,'CHARITY'),(34,8,0,3,'CAUSE'),(35,8,0,2,'CHARITY'),(38,9,0,2,'CHARITY'),(45,10,0,1,'CHARITY'),(46,10,0,3,'CAUSE'),(47,10,0,5,'CAUSE'),(48,11,0,2,'CHARITY');
 /*!40000 ALTER TABLE `pie_slices` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -256,7 +257,7 @@ CREATE TABLE `pies` (
   `owner_id` int(10) unsigned NOT NULL,
   `owner_type` varchar(45) NOT NULL,
   PRIMARY KEY  (`pie_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -265,7 +266,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `pies` WRITE;
 /*!40000 ALTER TABLE `pies` DISABLE KEYS */;
-INSERT INTO `pies` VALUES (1,1,'USER'),(2,2,'USER'),(3,3,'USER');
+INSERT INTO `pies` VALUES (1,1,'USER'),(2,2,'USER'),(3,3,'USER'),(4,2,'CAUSE'),(5,3,'CAUSE'),(6,4,'CAUSE'),(7,4,'USER'),(8,5,'USER'),(9,6,'USER'),(10,7,'USER'),(11,5,'CAUSE');
 /*!40000 ALTER TABLE `pies` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -307,8 +308,9 @@ CREATE TABLE `user` (
   `full_name` text character set utf8,
   `dob` date default NULL,
   `location` text character set utf8,
+  `registered_date` varchar(45) NOT NULL,
   PRIMARY KEY  (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -317,7 +319,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'baris-tosun','baris-tosun','Baris Abdurrahman Tosun','1980-12-17','London, England'),(2,'nathan@yura.net','nathan','Tony Wu','1980-12-17','London'),(3,'n@han.org.uk','nathan','Nathan Sudell','1980-12-17','London\r\n');
+INSERT INTO `user` VALUES (1,'baris-tosun','baris-tosun','Baris Abdurrahman Tosun','1980-12-17','London, England',''),(2,'nathan@yura.net','nathan','Tony Wu','1980-12-17','London',''),(3,'n@han.org.uk','nathan','Nathan Sudell','1980-12-17','London\r\n',''),(4,'a@b.co','password',NULL,NULL,NULL,'2009-02-26 23:51:18'),(5,'a@b.co','password',NULL,NULL,NULL,'2009-02-26 23:52:11'),(6,'q@w.er','password',NULL,NULL,NULL,'2009-02-26 23:52:50'),(7,'a@b.cd','password',NULL,NULL,NULL,'2009-02-27 00:38:14');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -330,4 +332,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2009-02-21 18:43:18
+-- Dump completed on 2009-02-27  0:45:20
