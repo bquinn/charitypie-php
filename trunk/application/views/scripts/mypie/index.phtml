@@ -1,3 +1,30 @@
+<?php echo $this->menu('mypie'); ?>
+
+<div id="contents">
+
+  <?php $this->searchsidebar(); ?>
+    <?php $action_url = $this->url(array(),'mypie',true); ?>
+  <div id="sidebar">        <h3>Search</h3>
+        <form method="post" action="<?php print $action_url ?>">
+            <input type="hidden" name="listMethod" value="search" />
+            <input type="text" id="search" name="s" valuex="Enter keyword to sea
+rch" onfocus="javascript:if (this.value=='Enter keyword to search') this.value='
+';" onblur="javascript:if (this.value=='') this.value='Enter keyword to search';
+" />
+            <input type="submit" value="Search" />
+        </form>
+        <h3>Categories</h3>
+        <form method="post" action="<?php print $action_url ?>">
+            <input type="hidden" name="listMethod" value="select" />
+            <select name="tag_id" id="category">            <?php
+                foreach ($this->charity_tags as $tag) {
+                    print('<option value="'.$tag['tag_id'].'">'.$tag['label'].' ('.$tag['charities'].')</option>');
+                }
+            ?>
+            </select>
+            <input type="submit" value="Search" />
+        </form>
+    </div>
 
 <?php if (!empty($this->messages)) { ?>
 <h1><?php print_r ($this->messages) ?></h1>
@@ -56,3 +83,6 @@ swfobject.embedSWF(
 ?>
 
 <div class="clear">&nbsp;</div>
+    <br class="clear" />
+</div>
+
