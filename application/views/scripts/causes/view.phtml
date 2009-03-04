@@ -1,6 +1,37 @@
-<h3>CAUSE :: <a href="<?php print $this->url(array('recipientType'=>'cause','recipientId'=>$this->cause['cause_id']),'addslice',true) ?>">Add to my pie</a></h3>
-<?php print_r ($this->cause); ?>
-<h3>SLICES</h3>
+<?php echo $this->menu('causes'); ?>
+
+<div id="contents">
+
+  <?php $this->searchsidebar(); ?>
+    <?php $action_url = $this->url(array(),'causes',true); ?>
+  <div id="sidebar">
+        <h3>Search</h3>
+        <form method="post" action="<?php print $action_url ?>">
+            <input type="hidden" name="listMethod" value="search" />
+            <input type="text" id="search" name="s" valuex="Enter keyword to sea
+rch" onfocus="javascript:if (this.value=='Enter keyword to search') this.value='
+';" onblur="javascript:if (this.value=='') this.value='Enter keyword to search';
+" />
+            <input type="submit" value="Search" />
+        </form>
+        <h3>Categories</h3>
+       <form method="post" action="<?php print $action_url ?>">
+            <input type="hidden" name="listMethod" value="select" />
+            <select name="tag_id" id="category">            <?php
+                foreach ($this->charity_tags as $tag) {
+                    print('<option value="'.$tag['tag_id'].'">'.$tag['label'].' ('.$tag['charities'].')</option>');
+                }
+            ?>
+            </select>
+            <input type="submit" value="Search" />
+        </form>
+    </div>
+
+<h3>Cause: <?php print $this->cause['title']?></h3>
+<!-- created by $this->cause['user_id'] -->
+<!-- Nth most popular cause on myCharityPie in the last XX days -->
+<p><a href="<?php print $this->url(array('recipientType'=>'cause','recipientId'=>$this->cause['cause_id']),'addslice',true) ?>">Add this cause to my pie</a></p>
+<?php // print_r ($this->cause); ?>
 <?php
 if ($this->slice_changes) {
   ?><p>Your latest changes have not been saved. 
@@ -24,7 +55,7 @@ if (empty($this->slices)) {
   ?>There are no pie slices<?php
 } else {
   foreach ($this->slices as $slice) { ?>
-  <?php print_r ($slice);
+  <?php // print_r ($slice);
 
   if ($this->owner) { ?>
     <a href="<?php print $this->url(array('sliceid'=>$slice['slice_id']),'deleteslice') ?>">remove from cause</a><br/>
@@ -37,3 +68,7 @@ if (empty($this->slices)) {
 <h3>This is your cause!</h3>
 <?php print $this->edit_form ?>
 <?php } ?>
+    <br class="clear" />
+</div>
+
+

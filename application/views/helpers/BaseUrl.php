@@ -14,6 +14,6 @@ class Zend_View_Helper_BaseUrl extends Zend_View_Helper_Abstract
 {
     public function baseurl()
     {
-      return Zend_Controller_Front::getInstance()->getBaseUrl();
+        return Zend_Controller_Front::getInstance()->getBaseUrl();
     }
 }

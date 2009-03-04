@@ -13,9 +13,6 @@ class Model_User {
   */
   public function getTable() {
     if (null === $this->_table) {
-      // since the dbTable is not a library item but an application item,
-      // we must require it to use it
-      require_once APPLICATION_PATH . '/Model/DbTable/User.php';
       $this->_table = new Model_DbTable_User;
     }
     return $this->_table;
