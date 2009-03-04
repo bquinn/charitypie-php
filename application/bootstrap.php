@@ -5,13 +5,12 @@
  // isn't index.php (e.g., if required from our test suite or a script).
  defined('APPLICATION_PATH')
    or define('APPLICATION_PATH', dirname(__FILE__));
- defined('APPLICATION_ENVIRONMENT')
-   or define('APPLICATION_ENVIRONMENT', 'development');
+   
  defined('APPLICATION_ENVIRONMENT')
     || define('APPLICATION_ENVIRONMENT',
         isset($_SERVER['APPLICATION_ENVIRONMENT'])
         ? $_SERVER['APPLICATION_ENVIRONMENT']
-        : 'production');
+        : 'development');
 
  // CONFIGURATION - Setup the configuration object
  // The Zend_Config_Ini component will parse the ini file, and resolve all of
@@ -21,6 +20,7 @@
 
  // SESSION - configure how we handle sessions
  // would prefer to join this up with the main config file but it doesn't seem to work?
+ 
  $sessionconfig = new Zend_Config_Ini( APPLICATION_PATH . '/config/session.ini', APPLICATION_ENVIRONMENT );
  if ($sessionconfig->toArray()) {
    Zend_Session::setOptions($sessionconfig->toArray());
