@@ -28,7 +28,31 @@ class PieController extends Zend_Controller_Action {
     $pieId = $this->_getParam('dataid');
     $pie = $this->_getPieModel('pie_id = '.$pieId);
     $this->_helper->layout->setLayout('blank');
+
+    $slices = $this->_getSliceModel()->getPieSlices($pieId);
+
+    $total = 0;
+    foreach ($slices as $slice) {
+      $total += $slice['size'];
+    }
+
+    $i = 0;
+    foreach ($slices as $slice) {
+      $slices[$i]['percentage'] = ($slice['size']/$total)*100;
+      $i++;
+    }
+
     $this->view->pie = $pie;
-    $this->view->slices = $this->_getSliceModel()->getPieSlices($pieId);
+    $this->view->slices = $slices;
+  }
+
+  public function saveAction() {
+    $pieId = $this->_getParam('dataid');
+    $slices = $this->_getSliceModel()->getPieSlices($pieId);
+    foreach ($slices as $slice) {
+      $size = $_POST['slice-'.$slice['slice_id']];
+      $this->_getSliceModel()->updateSlice($pieId,$slice['slice_id'],$size);
+    }
+    $this->getHelper(redirector)->gotoRoute(array('controller'=>'mypie','action'=>'index'),'default');
   }
 }

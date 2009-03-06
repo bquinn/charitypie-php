@@ -34,18 +34,22 @@ class Model_DbTable_Slice extends Zend_Db_Table_Abstract {
    * @return int $sliceId
    * 
    */
-  public function addSlice($pieId,$recipientId,$type)
+  public function addSlice($pieId,$recipientId,$type,$size = 0)
   {
     $slices = $this->getPieSlices($pieId);
     $slice_id = null;
 
     // Check for existing slice
     if ($slices && (!empty($slices))) {
+      $i = 0;
       foreach ($slices as $slice) {
         if (($slice['recipient_type'] == $type) &&
             ($slice['recipient_id'] == $recipientId)) {
             $slice_id = $slice['slice_id'];
+            // If found update the size
+            $slices[$i]['size'] = $size;
         }
+        $i++;
       }
     }
 
@@ -68,12 +72,27 @@ class Model_DbTable_Slice extends Zend_Db_Table_Abstract {
         'pie_id' => $pieId,
         'recipient_id' => $recipientId,
         'recipient_type' => $type,
-        'recipient_name' => $name
+        'recipient_name' => $name,
+        'size' => 0
       );
 
       array_push($slices,$data);
-      $this->_setPieSlices($pieId,$slices,true);
     }
+    $this->_setPieSlices($pieId,$slices,true);
+  }
+
+  function updateSlice($pieId,$sliceId,$size) {
+    $slices = $this->getPieSlices($pieId);
+    if ($slices && (!empty($slices))) {
+      $i = 0;
+      foreach ($slices as $slice) {
+        if ($slice['slice_id'] == $sliceId) {
+            $slices[$i]['size'] = $size;
+        }
+        $i++;
+      }
+    }
+    $this->_setPieSlices($pieId,$slices,true);
   }
 
   /**

@@ -1,3 +1,9 @@
+<?php
+$this->headScript()->appendFile('http://ui.jquery.com/ui/ui.core.js');
+$this->headScript()->appendFile('http://ui.jquery.com/ui/ui.slider.js');
+$this->headScript()->appendFile($this->baseUrl().'/js/charitypie.js');
+?>
+
 <?php echo $this->menu('mypie'); ?>
 
 <div id="contents">
@@ -37,12 +43,17 @@ swfobject.embedSWF(
   if (empty($this->pie_slices)) {
     print "no slices";
   } else {
+    ?><form action="<?php print $this->baseUrl().'/pie/'.$this->pieId.'/save'; ?>" method="POST"><?php
     foreach ($this->pie_slices as $slice) {
       ?>
-      <h3><?php print $slice['recipient_name'] ?></h3>
-      <p><a href="<?php print $this->url(array('sliceid'=>$slice['slice_id']),'deleteslice',true) ?>">remove from MyPie</a>
+      <div class="slice">
+        <label><?php print $slice['recipient_name'] ?></label>
+        <input type="text" value="<?php print $slice['size']; ?>" name="slice-<?php print $slice['slice_id']; ?>"/>
+        <p><a href="<?php print $this->url(array('sliceid'=>$slice['slice_id']),'deleteslice',true) ?>">remove from MyPie</a>
+      </div>
       <?php
     }
+    ?><input type="submit" value="save changes"></form><?php
   }
   ?>
 </div>
