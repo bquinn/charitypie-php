@@ -116,16 +116,17 @@ class CausesController extends Zend_Controller_Action {
     $model = $this->_getModel();
     $cause = $model->fetchRow('cause_id = '.$causeId)->toArray();
 
-    $slices = null;
-    if ($pieId > 0) {
-      $slices = $this->_getSliceModel()->getPieSlices($pieId);
-    }
+//    $slices = null;
+//    if ($pieId > 0) {
+//      $slices = $this->_getSliceModel()->getPieSlices($pieId);
+//    }
 
     $this->view->pieId     = $pieId;
-    $this->view->owner     = $this->_isUserOwner($causeId);
-    $this->view->edit_form = $this->_getEditForm($causeId);
-    $this->view->slices    = $slices;
-    $this->view->slice_changes = $this->_getSliceModel()->hasPieChanged($pieId);
+    $this->_helper->actionStack('index','pie','default',array('pieId'=>$pieId));
+//    $this->view->owner     = $this->_isUserOwner($causeId);
+//    $this->view->edit_form = $this->_getEditForm($causeId);
+//    $this->view->slices    = $slices;
+//    $this->view->slice_changes = $this->_getSliceModel()->hasPieChanged($pieId);
     $this->view->cause     = $cause;
     $this->view->messages  = $this->_helper->FlashMessenger->getMessages();
   }

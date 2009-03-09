@@ -3,67 +3,11 @@
 <div id="contents">
 
   <?php $this->searchSidebar(); ?>
-    <?php $action_url = $this->url(array(),'causes',true); ?>
-  <div id="sidebar">
-        <h3>Search</h3>
-        <form method="post" action="<?php print $action_url ?>">
-            <input type="hidden" name="listMethod" value="search" />
-            <input type="text" id="search" name="s" valuex="Enter keyword to sea
-rch" onfocus="javascript:if (this.value=='Enter keyword to search') this.value='
-';" onblur="javascript:if (this.value=='') this.value='Enter keyword to search';
-" />
-            <input type="submit" value="Search" />
-        </form>
-        <h3>Categories</h3>
-       <form method="post" action="<?php print $action_url ?>">
-            <input type="hidden" name="listMethod" value="select" />
-            <select name="tag_id" id="category">            <?php
-                foreach ($this->charity_tags as $tag) {
-                    print('<option value="'.$tag['tag_id'].'">'.$tag['label'].' ('.$tag['charities'].')</option>');
-                }
-            ?>
-            </select>
-            <input type="submit" value="Search" />
-        </form>
-    </div>
 
 <h3>Cause: <?php print $this->cause['title']?></h3>
 <!-- created by $this->cause['user_id'] -->
 <!-- Nth most popular cause on myCharityPie in the last XX days -->
-<p><a href="<?php print $this->url(array('recipientType'=>'cause','recipientId'=>$this->cause['cause_id']),'addslice',true) ?>">Add this cause to my pie</a></p>
-<?php // print_r ($this->cause); ?>
-<?php
-if ($this->slice_changes) {
-  ?><p>Your latest changes have not been saved. 
-    <a href="<?php print $this->url(array('causeid'=>$this->cause['cause_id'],'action'=>'savepie'),'viewcause') ?>">Save</a> or
-    <a href="<?php print $this->url(array('causeid'=>$this->cause['cause_id'],'action'=>'reloadpie'),'viewcause') ?>">Disgard</a>.</p><?php
-}
-?>
 
-<script type="text/javascript" src="<?php print $this->baseUrl() ?>/flash/version-2/js/swfobject.js"></script>
-<script type="text/javascript">
-swfobject.embedSWF(
-  "<?php print $this->baseUrl() ?>/flash/version-2/open-flash-chart.swf", "my_chart", "550", "200",
-  "9.0.0","expressInstall.swf",
-  {"data-file":"<?php print $this->url(array('dataid'=>$this->pieId,'action'=>'load','controller'=>'pie'),'data') ?>"}
-  );
-</script>
-<div id="my_chart"></div>
-
-<?php
-if (empty($this->slices)) {
-  ?>There are no pie slices<?php
-} else {
-  foreach ($this->slices as $slice) { ?>
-  <?php // print_r ($slice);
-
-  if ($this->owner) { ?>
-    <a href="<?php print $this->url(array('sliceid'=>$slice['slice_id']),'deleteslice') ?>">remove from cause</a><br/>
-  <?php }
-  
-  }
-}
-?>
 <?php if ($this->user('id') == $this->cause['user_id']) { ?>
 <h3>This is your cause!</h3>
 <?php print $this->edit_form ?>

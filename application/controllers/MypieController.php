@@ -113,41 +113,38 @@ class MyPieController extends Zend_Controller_Action {
     return $causes;
   }
 
-  /**
-   * Reload a session stored pie (ie. disgard changes)
-   */
-  public function reloadpieAction() {
-    $pieId = $this->getUserPieId();
-    $this->_getSliceModel()->loadPieSlices($pieId);
-    $this->getHelper(redirector)->gotoSimple('index');
-  }
-
-  /**
-   * Save a session stored pie to disk
-   */
-  public function savepieAction() {
-    $pieId   = $this->getUserPieId();
-    $this->_getSliceModel()->savePieSlices($pieId);
-    $this->getHelper(redirector)->gotoSimple('index');
-  }
-
   public function indexAction() {
     $pieId = $this->getUserPieId();
 
-    $slices = null;
-    $count = 0;
-    if ($pieId) {
-      $slices = $this->_getSliceModel()->getPieSlices($pieId);
-      $count  = $this->_getSliceModel()->getPieSlicesCount($pieId);
-    }
+    //$slices = null;
+    //$count = 0;
+    //if ($pieId) {
+    //  $slices = $this->_getSliceModel()->getPieSlices($pieId);
+    //  $count  = $this->_getSliceModel()->getPieSlicesCount($pieId);
+    //}
 
     $causes = $this->getUserCauses();
 
     $this->view->pieId = $pieId;
     $this->view->causes = $causes;
-    $this->view->slices_count = $count;
-    $this->view->slice_changes = $this->_getSliceModel()->hasPieChanged($pieId);
-    $this->view->pie_slices = $slices;
+
+    //$this->_helper->pie();
+
+    $this->_helper->actionStack('index','pie','default',array('pieId'=>$pieId));
+
+    //$this->render('index');
+    //$this->render('/pie/index',null,true);
+
+//    $pie_request = new Zend_Controller_Request_Http();
+//    $pie_request->setActionName('index')->setControllerName('pie');
+//    $pie_response = new Zend_Controller_Response_Http();
+//    $this->getFrontController()->dispatch($pie_request,$pie_response);
+
+    //$pie = $this->render('/pie/index','the_pie',true);
+    //$this->view->slices_count = $count;
+    //$this->view->slice_changes = $this->_getSliceModel()->hasPieChanged($pieId);
+    //$this->view->pie_slices = $slices;
+    
     $this->view->cause_form = $this->getCreateCauseForm();
     $this->view->messages = $this->_helper->FlashMessenger->getMessages();
   }
