@@ -130,7 +130,7 @@ class MyPieController extends Zend_Controller_Action {
 
     //$this->_helper->pie();
 
-    $this->_helper->actionStack('index','pie','default',array('pieId'=>$pieId));
+    $this->_helper->actionStack('index','pie','default',array('itemId'=>$pieId));
 
     //$this->render('index');
     //$this->render('/pie/index',null,true);

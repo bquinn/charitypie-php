@@ -6,14 +6,18 @@
       "colours":   ["#d01f3c","#356aa0","#C79810"],
       "alpha":     0.6,
       "border":    1,
-      "animate":   1,
+      "animate":   0,
       "start-angle": 35,
       "values" :   [
 <?php
 $i = 0;
 foreach ($this->slices as $slice) {
   if ($i > 0) print ',';
-  ?>{"value":<?php print $slice['percentage'] ?>,"label":"<?php print $slice['recipient_name'] ?>"}<?php
+  ?>{
+    "value":<?php print $slice['percentage'] ?>,
+    "label":"<?php print $slice['recipient_name'] ?>",
+    "id":"<?php print $slice['slice_id'] ?>"
+    }<?php
   $i++;
 }
 ?>

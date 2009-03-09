@@ -122,7 +122,7 @@ class CausesController extends Zend_Controller_Action {
 //    }
 
     $this->view->pieId     = $pieId;
-    $this->_helper->actionStack('index','pie','default',array('pieId'=>$pieId));
+    $this->_helper->actionStack('index','pie','default',array('itemId'=>$pieId));
 //    $this->view->owner     = $this->_isUserOwner($causeId);
 //    $this->view->edit_form = $this->_getEditForm($causeId);
 //    $this->view->slices    = $slices;
