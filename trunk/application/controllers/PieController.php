@@ -123,7 +123,11 @@ class PieController extends Zend_Controller_Action {
 
     $i = 0;
     foreach ($slices as $slice) {
-      $slices[$i]['percentage'] = ($slice['size']/$total)*100;
+      if ($total == 0) {
+        $slices[$i]['percentage'] = 100/count($slices);
+      } else {
+        $slices[$i]['percentage'] = ($slice['size']/$total)*100;
+      }
       $i++;
     }
 
@@ -133,7 +137,7 @@ class PieController extends Zend_Controller_Action {
 
   public function updateAction() {
 
-    $pieId   = $this->_getParam('dataid');
+    $pieId   = $this->_getParam('itemId');
     $myPieId = $this->getUserPieId();
     
     if (!$this->isPieOwner($pieId)) {
@@ -224,7 +228,7 @@ class PieController extends Zend_Controller_Action {
 
 
   public function indexAction() {
-    $pieId = $this->_getParam('pieId');
+    $pieId = $this->_getParam('itemId');
 
     $slices = null;
     $count = 0;

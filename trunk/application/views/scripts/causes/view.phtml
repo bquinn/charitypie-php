@@ -8,6 +8,8 @@
 <!-- created by $this->cause['user_id'] -->
 <!-- Nth most popular cause on myCharityPie in the last XX days -->
 
+<a href="<?php print $this->url(array('recipientType'=>'cause','recipientId'=>$this->cause["cause_id"]),'addslice',true) ?>">[ add to my pie ]</a>
+
 <?php if ($this->user('id') == $this->cause['user_id']) { ?>
 <h3>This is your cause!</h3>
 <?php print $this->edit_form ?>
