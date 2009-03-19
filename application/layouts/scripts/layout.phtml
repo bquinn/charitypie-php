@@ -3,12 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>myCharityPie: many charities, one donation</title>
+<title>myCharityPie: One donation, many charities</title>
   <?php echo $this->headLink()->appendStylesheet($this->baseUrl().'/css/style.css') ?>
   <link type="text/css" href="http://ui.jquery.com/themes/base/ui.all.css" rel="stylesheet" />
   <?php print $this->headScript(); ?>
 </head>
-<body class="body-charities">
+<?php 
+# TODO: BODY class needs to change according to the section of site to body-charities, body-causes, body-mypie, body-home and body-about.
+?>
+<body class="body-about">
 
 <div id="topbar">
     <div id="utilities">
@@ -43,7 +46,7 @@ Share them with your friends!</p>
 
 	<?php echo $this->layout()->content ?>
 
-<div id="footer" class="grid_12">
+<div id="footer">
 	<p class="copyright">
 		<a href="/about/">About</a> | <a href="/about/terms/">Terms &amp; Conditions</a> | <a href="/about/privacy/">Privacy policy</a> | <a href="/about/contact/">Contact Us</a>
 	</p>
