@@ -8,7 +8,7 @@ br.clear { clear: both; height: 1px; margin: -1px 0 0 0; display: block; }
 
 /* TYPOGRAPHY */
 
-p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,select,input{margin-bottom:10px}
+p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,select,input{margin-bottom:0.6em}
 
 body {
 	color: #333333;
@@ -26,6 +26,7 @@ h1 {
 	font-size: 250%;
 	letter-spacing: -0.03em;
 	font-weight: lighter;
+	margin-bottom: 0.6em;
 }
 h2 {
 	font-family: Georgia, serif;
@@ -56,6 +57,10 @@ h6 {
 	font-family: Georgia, serif;
 	font-size: 150%;
 	margin-bottom: 2px;
+}
+blockquote {
+	font-weight: bold;
+	font-style: italic;
 }
 p {
 
@@ -160,6 +165,21 @@ body.body-charities #nav-charities a, body.body-causes #nav-causes a, body.body-
 
 #contents {	clear: both; }
 
+.homePages {
+	float: left;
+	width: 290px;
+	padding: 10px;
+	margin-left: 15px;
+}
+
+#page-charities {
+	margin-left: 0;
+}
+
+.homePages h2 { margin-bottom: 0.5em; }
+
+body.body-home #contents h1 { margin-left: 10px; }
+
 #sidebar, #mainContent {
 	float: left;
 	margin-left: 10px;
@@ -201,31 +221,6 @@ body.body-mypie #sidebar {
 	width: 700px;
 }
 
-#teasers div
-{
-	text-align: center;
-}
-
-#teasers a
-{
-	color: #FFFFFF;
-}
-
-#teasers-charities
-{
-	background-color: #99CC6A;
-}
-
-#teasers-causes
-{
-	background-color: #FDB740;
-}
-
-#teasers-mypie
-{
-	background-color: #8193df;
-}
-
 body.body-about h4 {
 	text-align: center;
 	padding: 0 120px;
@@ -240,10 +235,16 @@ body.body-about h5 {
 	font-size: 130%;
 }
 
+body.body-about #contents { padding: 0 10px; }
+
+ul.teamMembers li { list-style: disc; margin-left: 2em; }
+
 #footer {
 	margin: 20px 10px 10px;
 	clear: both;
 }
+
+#footer p { margin-bottom: 0.3em; }
 
 p.copyright {
 	color: #666666;
