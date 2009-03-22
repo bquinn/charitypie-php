@@ -1,0 +1,71 @@
+<div class="pagination” style=”width:100%">
+
+<div style="float:right;width:70%;">
+
+<!– First page link –>
+
+<?php if (isset($this->previous)): ?>
+
+  <a href="<?php print $this->url(array_merge($this->page_url,array('page'=>$this->first)),$this->page_route,true); ?>">Start</a> |
+
+<?php else: ?>
+
+  <span>Start</span> |
+
+<?php endif; ?>
+
+
+<!– Previous page link –>
+
+<?php if (isset($this->previous)): ?>
+
+  <a href="<?php print $this->url(array_merge($this->page_url,array('page'=>$this->previous)),$this->page_route,true); ?>">&lt; Previous</a> |
+<?php else: ?>
+
+<span class=”disabled”>&lt; Previous</span> |
+
+<?php endif; ?>
+
+
+<!– Numbered page links –>
+
+<?php foreach ($this->pagesInRange as $page): ?>
+
+<?php if ($page != $this->current): ?>
+
+    <a href="<?php print $this->url(array_merge($this->page_url,array('page'=>$page)),$this->page_route); ?>"><?php print $page; ?></a>
+  <?php else: ?>
+
+<?php print $page; ?>
+
+<?php endif; ?>
+
+<?php endforeach; ?>
+
+
+<!– Next page link –>
+
+<?php if (isset($this->next)): ?>
+
+  | <a href="<?php print $this->url(array_merge($this->page_url,array('page'=>$this->next)),$this->page_route); ?>">Next &gt;</a> |<?php else: ?>
+
+| <span class=”disabled”>Next &gt;</span> |
+
+<?php endif; ?>
+
+
+<!– Last page link –>
+
+<?php if (isset($this->next)): ?>
+
+  <a href="<?php print $this->url(array_merge($this->page_url,array('page'=>$this->last)),$this->page_route); ?>">End</a><?php else: ?>
+
+<span class=”disabled”>End</span>
+
+<?php endif; ?>
+
+&nbsp; Page <?php print $this->current; ?> of <?php print $this->last; ?>
+
+</div>
+
+</div>
