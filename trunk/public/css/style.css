@@ -253,3 +253,24 @@ p.copyright {
 	font-weight: normal;
 	text-align: center;
 }
+
+/**
+ * Added by nathan
+ */
+.pie-control {
+  border: solid 1px silver;
+  background: ghostwhite;
+  width: 600px;
+  text-align: center;
+}
+.pie-control .slices-control {
+  width: 450px;
+  text-align: left;
+}
+.pie-control .notice {
+  background: LightYellow;
+  border: solid 1px Gold;
+  width: 400px;
+  margin: 10px auto;
+  padding: 6px;
+}
