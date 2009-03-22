@@ -10,8 +10,9 @@
 
 <a href="<?php print $this->url(array('recipientType'=>'cause','recipientId'=>$this->cause["cause_id"]),'addslice',true) ?>">[ add to my pie ]</a>
 
-<?php if ($this->user('id') == $this->cause['user_id']) { ?>
-<h3>This is your cause!</h3>
+<?php $this->pie() ?>
+
+<?php if ($this->is_pie_owner) { ?>
 <?php print $this->edit_form ?>
 <?php } ?>
     <br class="clear" />
