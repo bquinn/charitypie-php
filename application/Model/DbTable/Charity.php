@@ -37,6 +37,30 @@ class Model_DbTable_Charity extends Zend_Db_Table_Abstract {
     return $this->getAdapter()->fetchAll("SELECT * FROM charities AS c WHERE c.name LIKE ?",$searchStr);
   }
 
+  /**
+   * Returns a Zend_Db_Select to fetch all charities for the specified category
+   * @param <type> $categoryId
+   */
+  public function getCharitiesByCategorySelect($categoryId) {
+    $select = new Zend_Db_Select($this->getAdapter());
+    $select->from(array('c'=>'charities'))
+           ->join(array('cc'=>'categories_charities'),'c.charity_id = cc.charity_id')
+           ->where('cc.category_id = ?',$categoryId);
+    return $select;
+  }
+
+  /**
+   * Returns a Zend_Db_Select to fetch all charities for the specified search
+   * @param <type> $search_str
+   */
+  public function getCharitiesBySearchSelect($search_str) {
+    $searchStr = '%'.$search_str.'%';
+    $select = new Zend_Db_Select($this->getAdapter());
+    $select->from(array('c'=>'charities'))
+           ->where('c.name LIKE ?',$searchStr);
+    return $select;
+  }
+
   public function fetchCharitiesByTag($tagId) {
     return $this->getAdapter()->fetchAll("SELECT * FROM charities AS c INNER JOIN charity_label AS cl ON c.charity_id = cl.charity_id WHERE cl.tag_id = ?",$tagId);
   }
