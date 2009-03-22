@@ -141,9 +141,27 @@ class Model_DbTable_Slice extends Zend_Db_Table_Abstract {
   public function _getPieSlices($pieId) {
     $pie = $this->_pies[$pieId];
     if ($pie) {
-      // If the pie has no slices make sure an empty array is returned.
+
+      $total = 0;
+      foreach ($pie['slices'] as $slice) {
+        $total += $slice['size'];
+      }
+
+      $i = 0;
+      foreach ($pie['slices'] as $slice) {
+        if ($total == 0) {
+          $pie['slices'][$i]['size'] = 100;
+          $pie['slices'][$i]['percentage'] = 100/count($pie['slices']);
+        } else {
+          $pie['slices'][$i]['percentage'] = ($slice['size']/$total)*100;
+        }
+        $i++;
+      }
+    
+     // If the pie has no slices make sure an empty array is returned.
       return ($pie['slices']) ?  $pie['slices'] : array();
     }
+
     return null;
   }
 
@@ -190,6 +208,7 @@ class Model_DbTable_Slice extends Zend_Db_Table_Abstract {
       // Prepare slice for saving
       unset($slice['slice_id']);
       unset($slice['recipient_name']);
+      unset($slice['percentage']);
       $slice['pie_id'] = $pieId;
       // Save
       $this->insert($slice);
