@@ -4,7 +4,11 @@
     <h1>Welcome to myCharityPie!</h1>
 
     <div id="page-charities" class="homePages">
-        <h2><a href="/charities/">Charities</a></h2>
+        <h2><a href="<?php 
+          print $this->url(array(
+                  'controller'=>'charities',
+                  'action'=>'index'
+                  )); ?>">Charities</a></h2>
         <p>Browse, search, and find your favourite charities</p>
     </div>
 
