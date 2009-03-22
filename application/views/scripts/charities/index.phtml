@@ -20,7 +20,7 @@
         {
           print('<p><a href="'.$this->url(array('charityid'=>$charity['charity_id']),'viewcharity').'">'.$charity['name'].'</a><br />'.substr($charity['description'],0,200).'</p>');
         }
-        print $this->paginationControl($this->paginator, 'Sliding', 'charities\pagination.phtml',array('page_url'=>$this->page_url,'page_route'=>$this->page_route));
+        print $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml',array('page_url'=>$this->page_url,'page_route'=>$this->page_route));
 	  }
 
 		?>

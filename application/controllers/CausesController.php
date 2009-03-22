@@ -10,6 +10,7 @@ class CausesController extends Zend_Controller_Action {
   protected $_model;
   protected $_pieModel;
   protected $_sliceModel;
+  protected $_tagModel;
   protected $pie;
 
   protected function _getModel() {
@@ -37,6 +38,13 @@ class CausesController extends Zend_Controller_Action {
 			$this->_userModel = new Model_User();
 		}
 		return $this->_userModel;
+	}
+  protected function _getTagModel() {
+		if (null == $this->_tagModel) {
+			//require_once Model_DbTable_Tag();
+			$this->_tagModel = new Model_DbTable_Tag();
+		}
+		return $this->_tagModel;
 	}
   protected function _getUserId() {
 		$userId = null;
@@ -75,6 +83,46 @@ class CausesController extends Zend_Controller_Action {
     return $form;
   }
 
+  protected function _getTaggingForm($causeId) {
+    $form = new Zend_Form();
+    $form->setMethod('post');
+    $form->setAction('tag');
+    $form->addElement('text','label',array('value'=>$cause['title']));
+    $form->addElement('hidden','causeid',array('value'=>$causeId));
+    $form->addElement('submit','tag');
+
+    $form->removeDecorator('DtDdWrapper');
+    $form->removeDecorator('Label');
+    $form->removeDecorator('HtmlTag');
+    foreach($form->getElements() as $element) {
+      $element->removeDecorator('DtDdWrapper');
+      $element->removeDecorator('Label');
+      $element->removeDecorator('HtmlTag');
+    }
+
+    return $form;
+  }
+
+  public function tagAction() {
+    $causeId = $_POST['causeid'];
+    $tag     = $_POST['label'];
+    $userId  = $this->_getUserId();
+
+    $this->_getModel()->tagCause($tag,$causeId,$userId);
+
+    $this->_helper->redirector->gotoRoute(array('causeid'=>$causeId),'viewcause');
+  }
+
+  public function removetagAction() {
+    $tagId   = $this->_getParam('tagid');
+    $causeId = $this->_getParam('causeid');
+    $userId  = $this->_getUserId();
+
+    $this->_getModel()->removeTag($tagId,$causeId,$userId);
+
+    $this->getHelper(redirector)->gotoRoute(array('causeid'=>$causeId),'viewcause');
+  }
+
   public function saveAction() {
     $causeId = $_POST['id'];
     $data = array(
@@ -106,7 +154,27 @@ class CausesController extends Zend_Controller_Action {
   }
 
   public function indexAction() {
-    $this->view->causes = $this->_getModel()->fetchAll()->toArray();
+    $this->view->tags = $this->_getModel()->fetchAllTags();
+  }
+
+  public function browseAction() {
+    $tagId = $this->_getParam('tagid');
+
+    $tag = $this->_getTagModel()->find($tagId)->toArray();
+
+    $select = $this->_getModel()->getCausesByTagSelect($tagId);
+
+    $paginator = Zend_Paginator::factory($select);
+    $page=$this->_getParam('page',1);
+    $paginator->setItemCountPerPage(4);
+    $paginator->setCurrentPageNumber($page);
+
+    $page_url = array('tagid'=>$tagId);
+
+    $this->view->page_route = "browsecauses";
+    $this->view->page_url = $page_url;
+    $this->view->tag = $tag[0];
+    $this->view->paginator  = $paginator;
   }
 
   public function viewAction() {
@@ -116,10 +184,23 @@ class CausesController extends Zend_Controller_Action {
     $model = $this->_getModel();
     $cause = $model->fetchRow('cause_id = '.$causeId)->toArray();
 
+    $tags = $this->_getModel()->fetchCauseTags($causeId);
+
+    $user_tags = null;
+    $userId = $this->_getUserId();
+    if ($userId > 0) $user_tags = $this->_getModel()->fetchUserCauseTags($causeId,$userId);
+
     $this->view->pieId     = $pieId;
+
+    $tagging_count = $this->_getModel()->fetchTaggingUserCount($causeId);
 
     $this->_helper->getHelper('Pie')->setViewPie($pieId,$this);
 
+    $this->view->tagging_count = $tagging_count;
+    $this->view->user      = $userId;
+    $this->view->user_tags = $user_tags;
+    $this->view->tagging_form = $this->_getTaggingForm($causeId);
+    $this->view->all_tags  = $tags;
     $this->view->edit_form = $this->_getEditForm($causeId);
     $this->view->cause     = $cause;
     $this->view->messages  = $this->_helper->FlashMessenger->getMessages();

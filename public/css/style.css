@@ -262,6 +262,7 @@ p.copyright {
   background: ghostwhite;
   width: 600px;
   text-align: center;
+  padding: 10px;
 }
 .pie-control .slices-control {
   width: 450px;
