@@ -16,7 +16,7 @@
 <div id="topbar">
     <div id="utilities">
         <div id="utility-links">
-			<a href="/about/">About</a> |
+			<a href="<?php echo $this->url(array('action'=>'index', 'controller'=>'about'), 'default') ?>">About</a> |
 			<a href="http://blog.mycharitypie.com/">Blog</a>
 		</div>
         <div id="utility-user">
@@ -48,9 +48,12 @@ Share them with your friends!</p>
 
 <div id="footer">
 	<p class="copyright">
-		<a href="/about/">About</a> | <a href="/about/terms/">Terms &amp; Conditions</a> | <a href="/about/privacy/">Privacy policy</a> | <a href="/about/contact/">Contact Us</a>
+		<a href="<?php echo $this->url(array('action'=>'index', 'controller'=>'about'), 'default') ?>">About</a>
+ | <a href="<?php echo $this->url(array('action'=>'terms', 'controller'=>'about'), 'default') ?>">Terms &amp; Conditions</a>
+ | <a href="<?php echo $this->url(array('action'=>'privacy', 'controller'=>'about'), 'default') ?>">Privacy policy</a>
+ | <a href="<?php echo $this->url(array('action'=>'contact', 'controller'=>'about'), 'default') ?>">Contact Us</a>
 	</p>
-	<p class="copyright">&copy; 2009 myCharityPie</p>
+	<p class="copyright">&copy; 2009 myCharityPie. <a href="<?php echo $this->url(array('action'=>'terms','controller'=>'about'), 'default')?>">Charity Commission content used under licence.</a></p>
 </div>
 </body>
 </html>
