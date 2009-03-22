@@ -12,7 +12,7 @@
 
 <a href="<?php print $this->url(array('recipientType'=>'cause','recipientId'=>$this->cause["cause_id"]),'addslice',true) ?>">[ add to my pie ]</a>
 
-<?php print $this->partial('pie\index.phtml',array('pie'=>$this->pie)); ?>
+<?php print $this->partial('pie/index.phtml',array('pie'=>$this->pie)); ?>
 
 <div class="tags">
   <p>This cause has been tagged by <?php print $this->tagging_count; ?> user(s)</p>
