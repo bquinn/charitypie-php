@@ -68,26 +68,48 @@ class CharitiesController extends Zend_Controller_Action {
     $charities = array();
     $title = '';
 
-    if (isset($_REQUEST['listMethod']))
+    $listMethod = (isset($_REQUEST['listMethod']))?$_REQUEST['listMethod']:null;
+    if ($listMethod == null) {
+      // by url...
+      $categoryId = $this->_getParam('categoryid');
+      $search_str = $this->_getParam('search');
+      if ($categoryId != null) $listMethod = 'browse';
+      if ($search_str != null) $listMethod = 'search';
+    } else {
+      $categoryId = ($listMethod=='browse')?$_REQUEST['category_id']:0;
+      $search_str = ($listMethod=='search')?$_REQUEST['s']:null;
+    }
+
+    if ($listMethod != null)
     {
-      $listMethod = $_REQUEST['listMethod'];
-      if ($listMethod == 'select')
+      if ($listMethod == 'browse')
       {
-        $model = $this->_getModel();
-        $categoryId = $_REQUEST['category_id'];
-        $charities = $model->fetchCharitiesByCategory($categoryId);
+        $select = $model->getCharitiesByCategorySelect($categoryId);
         $category = $this->_getCategoryModel()->find($categoryId)->toArray();
-        $title = "Browsing charities in the ".$category['label']." category";
+        $title = "Browsing charities in the ".$category[0]['label']." category";
+        $page_url = array('categoryid'=>$categoryId);
+        $page_route = 'category';
       }
       if ($listMethod == 'search')
       {
-        $str = $_REQUEST['s'];
-        $charities = $model->fetchCharitiesBySearch($str);
-        $title  = "Search results for '".$str."'";
+        $select = $model->getCharitiesBySearchSelect($search_str);
+        $title  = "Search results for '".$search_str."'";
+        $page_url = array('search'=>$search_str);
+        $page_route = 'search';
       }
     }
 
-    $this->view->charities = $charities;
+    /**
+     * Pagination
+     */
+    $paginator = Zend_Paginator::factory($select);
+    $page=$this->_getParam('page',1);
+    $paginator->setItemCountPerPage(2);
+    $paginator->setCurrentPageNumber($page);
+
+    $this->view->paginator  = $paginator;
+    $this->view->page_url   = $page_url;
+    $this->view->page_route = $page_route;
     $this->view->list_title = $title;
   }
 

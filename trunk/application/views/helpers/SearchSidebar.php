@@ -27,7 +27,7 @@ class My_View_Helper_SearchSidebar extends Zend_View_Helper_Abstract
         </form>
         <h3>Categories</h3>
         <form method="post" action="<?php print $action_url ?>">
-            <input type="hidden" name="listMethod" value="select" />
+            <input type="hidden" name="listMethod" value="browse" />
             <select name="category_id" id="category">
             <?php
                 foreach ($categories as $category) {
