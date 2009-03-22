@@ -67,6 +67,9 @@
  // controller directory.
  $frontController->setControllerDirectory(APPLICATION_PATH . '/controllers');
 
+ // CONTROLLER HELPERS
+ Zend_Controller_Action_HelperBroker::addPath(APPLICATION_PATH.'/controllers/helpers');
+
  // APPLICATION ENVIRONMENT - Set the current environment.
  // Set a variable in the front controller indicating the current environment --
  // commonly one of development, staging, testing, production, but wholly
