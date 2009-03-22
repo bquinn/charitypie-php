@@ -10,7 +10,7 @@
 
 <h2>My Pie</h3>
 
-<?php print $this->pie(); ?>
+<?php print $this->partial('pie\index.phtml',array('pie'=>$this->pie)); ?>
 
 <?php if ($this->user()) { ?>
   <h3>My Causes</h3>

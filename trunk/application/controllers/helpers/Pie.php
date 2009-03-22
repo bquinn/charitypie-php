@@ -105,10 +105,13 @@ class Zend_Controller_Action_Helper_Pie extends Zend_Controller_Action_Helper_Ab
       $count  = $this->_getSliceModel()->getPieSlicesCount($pieId);
     }
 
-    $controller->view->is_pie_owner = $this->isPieOwner($pieId);
-    $controller->view->pieId = $pieId;
-    $controller->view->slices_count = $count;
-    $controller->view->slice_changes = $this->_getSliceModel()->hasPieChanged($pieId);
-    $controller->view->pie_slices = $slices;
+    $pie = new stdClass;
+    $pie->is_pie_owner = $this->isPieOwner($pieId);
+    $pie->pieId = $pieId;
+    $pie->slices_count = $count;
+    $pie->slice_changes = $this->_getSliceModel()->hasPieChanged($pieId);
+    $pie->pie_slices = $slices;
+
+    $controller->view->pie = $pie;
   }
 }
