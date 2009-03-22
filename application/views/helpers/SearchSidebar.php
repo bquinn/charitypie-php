@@ -15,7 +15,7 @@ class My_View_Helper_SearchSidebar extends Zend_View_Helper_Abstract
 	public function SearchSidebar()
 	{
     $model = new Model_DbTable_Charity();
-    $charity_tags = $model->fetchAllCharityTags();
+    $categories = $model->fetchAllCharityCategories();
 
     $action_url = $this->view->url(array('controller'=>'charities'),'default',true);
     ?>
@@ -28,9 +28,10 @@ class My_View_Helper_SearchSidebar extends Zend_View_Helper_Abstract
         <h3>Categories</h3>
         <form method="post" action="<?php print $action_url ?>">
             <input type="hidden" name="listMethod" value="select" />
-            <select name="tag_id" id="category">            <?php
-                foreach ($charity_tags as $tag) {
-                    print('<option value="'.$tag['tag_id'].'">'.$tag['label'].' ('.$tag['charities'].')</option>');
+            <select name="category_id" id="category">
+            <?php
+                foreach ($categories as $category) {
+                    print('<option value="'.$category['category_id'].'">'.$category['label'].' ('.$category['charities'].')</option>');
                 }
             ?>
             </select>
