@@ -20,6 +20,18 @@ class Model_DbTable_Charity extends Zend_Db_Table_Abstract {
       GROUP BY cl.tag_id");
   }
 
+  /**
+   * Retruns all categories with a charity count
+   * @return array
+   */
+  public function fetchAllCharityCategories() {
+    return $this->getAdapter()->fetchAll("
+      SELECT c.category_id, c.label, COUNT(cc.charity_id) AS charities
+      FROM categories AS c
+      INNER JOIN categories_charities AS cc ON c.category_id = cc.category_id
+      GROUP BY c.category_id");
+  }
+
   public function fetchCharitiesBySearch($searchStr) {
     $searchStr = '%'.$searchStr.'%';
     return $this->getAdapter()->fetchAll("SELECT * FROM charities AS c WHERE c.name LIKE ?",$searchStr);
@@ -27,6 +39,10 @@ class Model_DbTable_Charity extends Zend_Db_Table_Abstract {
 
   public function fetchCharitiesByTag($tagId) {
     return $this->getAdapter()->fetchAll("SELECT * FROM charities AS c INNER JOIN charity_label AS cl ON c.charity_id = cl.charity_id WHERE cl.tag_id = ?",$tagId);
+  }
+
+  public function fetchCharitiesByCategory($categoryId) {
+    return $this->getAdapter()->fetchAll("SELECT * FROM charities AS c INNER JOIN categories_charities AS cc ON c.charity_id = cc.charity_id WHERE cc.category_id = ?",$categoryId);
   }
 
   public function fetchCharityById($charityid) {
@@ -41,4 +57,5 @@ class Model_DbTable_Charity extends Zend_Db_Table_Abstract {
       throw new MyCharityPie_CharityDoesNotExistException("Charity ".$charityid." doesn't exist in the database.");
     }
   }
+
 } 
