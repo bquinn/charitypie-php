@@ -1,0 +1,29 @@
+<?php echo $this->menu('charities'); ?>
+
+<div id="contents">
+
+  <?php $this->searchSidebar(); ?>
+
+	<div id="mainContent">
+    <h3>Causes tagged as <?php print $this->tag['label']; ?></h3>
+    
+    <?php if (count($this->paginator) == 0) { ?>
+      
+      <p>No causes found</p>
+
+    <?php } else { ?>
+    
+      <?php
+        foreach($this->paginator as $cause)
+        {
+          print('<p><a href="'.$this->url(array('causeid'=>$cause['cause_id']),'viewcause').'">'.$cause['title'].'</a><br />'.substr($cause['description'],0,200).'</p>');
+        }
+        print $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml',array('page_url'=>$this->page_url,'page_route'=>$this->page_route));
+	  }
+
+		?>
+	</div>
+
+    <br class="clear" />
+</div>
+
