@@ -8,14 +8,14 @@
 		<h3>Causes</h3>
 
 <?php
-foreach ($this->causes as $cause) {
-?>
-  <a href="<?php print $this->url(array('causeid'=>$cause['cause_id']),'viewcause') ?>"><?php print $cause['title'] ?></a><br/>
-<?php
-//  print_r ($cause);
-  print "<hr>";
+foreach ($this->tags as $tag) {
+  ?><a href="<?php print $this->url(array(
+    'tagid'=>$tag['tag_id'],
+    'page'=>1
+  ),'browsecauses') ?>"><?php print $tag['label'] ?></a> (<?php print $tag['causes']?>) <?php
 }
 ?>
+
 	</div>
     <br class="clear" />
 </div>

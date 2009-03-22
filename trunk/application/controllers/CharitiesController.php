@@ -97,15 +97,14 @@ class CharitiesController extends Zend_Controller_Action {
         $page_url = array('search'=>$search_str);
         $page_route = 'search';
       }
+      /**
+       * Pagination
+       */
+      $paginator = Zend_Paginator::factory($select);
+      $page=$this->_getParam('page',1);
+      $paginator->setItemCountPerPage(2);
+      $paginator->setCurrentPageNumber($page);
     }
-
-    /**
-     * Pagination
-     */
-    $paginator = Zend_Paginator::factory($select);
-    $page=$this->_getParam('page',1);
-    $paginator->setItemCountPerPage(2);
-    $paginator->setCurrentPageNumber($page);
 
     $this->view->paginator  = $paginator;
     $this->view->page_url   = $page_url;

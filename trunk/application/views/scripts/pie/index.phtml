@@ -67,7 +67,9 @@
       } else {
         ?>
         <div class="slices-control">
-        <form action="<?php print $this->url(array('itemId'=>$this->pie->pieId,'action'=>'update'),'pie'); ?>" method="POST" id="pie_slices"><?php
+        <?php if ($this->pie->is_pie_owner) { ?>
+        <form action="<?php print $this->url(array('itemId'=>$this->pie->pieId,'action'=>'update'),'pie'); ?>" method="POST" id="pie_slices">
+        <?php }
         foreach ($this->pie->pie_slices as $slice) {
           if ($this->pie->is_pie_owner) {
           ?>
@@ -81,8 +83,11 @@
             print $slice['recipient_name']."<br/>";
           }
         }
-        if ($this->pie->is_pie_owner) { ?><input type="submit" value="save changes"></form>
-        </div><?php }
+        if ($this->pie->is_pie_owner) { ?>
+          <input type="submit" value="save changes"></form>
+        <?php } ?>
+        </div>
+        <?php
       }
   }
   ?>

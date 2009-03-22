@@ -8,9 +8,44 @@
 <!-- created by $this->cause['user_id'] -->
 <!-- Nth most popular cause on myCharityPie in the last XX days -->
 
+<div class="cause-description"><?php print $this->cause['description']?></div>
+
 <a href="<?php print $this->url(array('recipientType'=>'cause','recipientId'=>$this->cause["cause_id"]),'addslice',true) ?>">[ add to my pie ]</a>
 
 <?php print $this->partial('pie\index.phtml',array('pie'=>$this->pie)); ?>
+
+<div class="tags">
+  <p>This cause has been tagged by <?php print $this->tagging_count; ?> user(s)</p>
+  <dl>
+  <dt>Tags</dt>
+  <?php
+  foreach ($this->all_tags as $tag) {
+    print '<dd>'.$tag['label']."(".$tag['count'].")</dd>";
+  }
+  ?>
+  </dl>
+  
+</div>
+
+<?php if ($this->user > 0) { ?>
+  <div class="user-tags">
+    <dl>
+    <dt>My Tags</dt>
+    <?php
+    foreach ($this->user_tags as $tag) {
+      print $tag['label'].' ';
+      ?><dd><a href="<?php print $this->url(array(
+        'tagid'=>$tag['tag_id'],
+        'causeid'=>$this->cause['cause_id']
+      ),'removecausetag') ?>">delete</a></dd><?php
+    }
+    ?>
+    </dl>
+    <?php
+    print $this->tagging_form;
+    ?>
+  </div>
+  <?php } ?>
 
 <?php if ($this->is_pie_owner) { ?>
 <?php print $this->edit_form ?>
