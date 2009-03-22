@@ -13,13 +13,21 @@
     </div>
 
     <div id="page-causes" class="homePages">
-        <h2><a href="/causes/">Causes</a></h2>
+        <h2><a href="<?php
+          print $this->url(array(
+                  'controller'=>'causes',
+                  'action'=>'index'
+                  )); ?>">Causes</a></h2>
         <p>Make your own cause of your favourite charities and share it with others.</p>
         <p>Check out the causes made by others, you can even add them to your own pie. Why not check out <a href="causes/123">Bob Geldof's PovertyPie</a> and <a href="causes/234">Bono's RED </a>?</p>
     </div>
 
     <div id="page-mypie" class="homePages">
-        <h2><a href="/mypie/">My Pie</a></h2>
+        <h2><a href="<?php
+          print $this->url(array(
+                  'controller'=>'mypie',
+                  'action'=>'index'
+                  )); ?>">My Pie</a></h2>
         <p>Make changes to your own pie. See the latest news from your favourite charities. See who else has a pie similar to your own.</p>
     </div>
 </div>
