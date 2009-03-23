@@ -8,15 +8,13 @@
   <link type="text/css" href="http://ui.jquery.com/themes/base/ui.all.css" rel="stylesheet" />
   <?php print $this->headScript(); ?>
 </head>
-<?php 
-# TODO: BODY class needs to change according to the section of site to body-charities, body-causes, body-mypie, body-home and body-about.
-?>
-<body class="body-home">
+
+<body class="body-<?php print $this->placeholder('site-section'); ?>">
 
 <div id="topbar">
     <div id="utilities">
         <div id="utility-links">
-			<a href="<?php echo $this->url(array('action'=>'index', 'controller'=>'about'), 'default') ?>">About</a> |
+			<a href="<?php print $this->url(array('controller'=>'about','action'=>'index'),'default'); ?>">About</a> |
 			<a href="http://blog.mycharitypie.com/">Blog</a>
 		</div>
         <div id="utility-user">
@@ -48,10 +46,16 @@ Share them with your friends!</p>
 
 <div id="footer">
 	<p class="copyright">
-		<a href="<?php echo $this->url(array('action'=>'index', 'controller'=>'about'), 'default') ?>">About</a>
- | <a href="<?php echo $this->url(array('action'=>'terms', 'controller'=>'about'), 'default') ?>">Terms &amp; Conditions</a>
- | <a href="<?php echo $this->url(array('action'=>'privacy', 'controller'=>'about'), 'default') ?>">Privacy policy</a>
- | <a href="<?php echo $this->url(array('action'=>'contact', 'controller'=>'about'), 'default') ?>">Contact Us</a>
+    <?php
+    $url_about   = $this->url(array('controller'=>'about','action'=>'index'),'default');
+    $url_terms   = $this->url(array('controller'=>'about','action'=>'terms'),'default');
+    $url_privacy = $this->url(array('controller'=>'about','action'=>'privacy'),'default');
+    $url_contact = $this->url(array('controller'=>'about','action'=>'contact'),'default');
+    ?>
+		<a href="<?php print $url_about ?>">About</a> |
+    <a href="<?php print $url_terms ?>">Terms &amp; Conditions</a> |
+    <a href="<?php print $url_privacy ?>">Privacy policy</a> |
+    <a href="<?php print $url_contact ?>">Contact Us</a>
 	</p>
 	<p class="copyright">&copy; 2009 myCharityPie. <a href="<?php echo $this->url(array('action'=>'terms','controller'=>'about'), 'default')?>">Charity Commission content used under licence.</a></p>
 </div>
