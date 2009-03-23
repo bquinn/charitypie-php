@@ -260,7 +260,7 @@ p.copyright {
 .pie-control {
   border: solid 1px silver;
   background: ghostwhite;
-  width: 600px;
+  width: 580px;
   text-align: center;
   padding: 10px;
 }
@@ -286,4 +286,18 @@ p.copyright {
   border: solid 1px LightSteelBlue;
   background: AliceBlue;
   color: Navy;
+}
+
+/**
+ * Inline Actions
+ */
+.body-inline {
+  text-align: center;
+  margin-top: 100px;
+}
+.body-inline #inline {
+  width: 500px;
+  background: LightYellow;
+  border: solid 1px Gold;
+  padding: 20px;
 }

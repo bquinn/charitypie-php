@@ -133,7 +133,8 @@ class MyPieController extends Zend_Controller_Action {
 
       $this->getHelper(redirector)->direct('index');
     }
-    
+
+    $this->_helper->layout->setLayout('inline_action');
     $this->view->donate_form = $this->getDonateForm();
   }
 

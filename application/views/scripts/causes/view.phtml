@@ -10,7 +10,6 @@
 
 <?php print $this->partial('pie/index.phtml',array('pie'=>$this->pie)); ?>
 
-<br class="clear"/>
 <div class="tags">
   <p>This cause has been tagged by <?php print $this->tagging_count; ?> user(s)</p>
   <dl>
@@ -42,10 +41,12 @@
     print $this->tagging_form;
     ?>
   </div>
-  <?php } ?>
-
-<?php if ($this->is_pie_owner) { ?>
-<?php print $this->edit_form ?>
 <?php } ?>
+
+<?php
+if ($this->pie->is_pie_owner) {
+  print $this->edit_form;
+}
+?>
 
 

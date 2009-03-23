@@ -129,6 +129,8 @@ class PieController extends Zend_Controller_Action {
           $form->setAction($this->getFrontController()->getBaseUrl().'/pie/add/'.$type.'/'.$recipientId);
           $form->addElement('select','pie',array('label'=>'Which pie?','multioptions'=>$pies));
           $form->addElement('submit','create');
+
+          $this->_helper->layout->setLayout('inline_action');
           $this->view->form = $form;
           return;
         }
