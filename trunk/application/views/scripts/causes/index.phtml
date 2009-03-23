@@ -1,13 +1,6 @@
 <?php $this->placeholder('site-section')->set('causes'); ?>
 
-<?php echo $this->menu('causes'); ?>
-
-<div id="contents">
-
-  <?php $this->searchSidebar(); ?>
-
-	<div id="mainContent">
-		<h3>Causes</h3>
+<h3>Causes</h3>
 
 <?php
 foreach ($this->tags as $tag) {
@@ -17,7 +10,3 @@ foreach ($this->tags as $tag) {
   ),'browsecauses') ?>"><?php print $tag['label'] ?></a> (<?php print $tag['causes']?>) <?php
 }
 ?>
-
-	</div>
-    <br class="clear" />
-</div>

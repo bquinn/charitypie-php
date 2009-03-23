@@ -1,11 +1,5 @@
 <?php $this->placeholder('site-section')->set('causes'); ?>
 
-<?php echo $this->menu('causes'); ?>
-
-<div id="contents">
-
-  <?php $this->searchSidebar(); ?>
-
 <h3>Cause: <?php print $this->cause['title']?></h3>
 <!-- created by $this->cause['user_id'] -->
 <!-- Nth most popular cause on myCharityPie in the last XX days -->
@@ -53,7 +47,5 @@
 <?php if ($this->is_pie_owner) { ?>
 <?php print $this->edit_form ?>
 <?php } ?>
-    <br class="clear" />
-</div>
 
 

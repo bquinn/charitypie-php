@@ -106,6 +106,7 @@ class CharitiesController extends Zend_Controller_Action {
       $paginator->setCurrentPageNumber($page);
     }
 
+    $this->_helper->layout->setLayout('search_sidebar');
     $this->view->paginator  = $paginator;
     $this->view->page_url   = $page_url;
     $this->view->page_route = $page_route;
@@ -119,6 +120,8 @@ class CharitiesController extends Zend_Controller_Action {
 
     # get info on the charity itself
     $charity = $charity_model->fetchCharityById($charity_id);
+
+    $this->_helper->layout->setLayout('search_sidebar');
     $this->view->charity = $charity;
   }
 
