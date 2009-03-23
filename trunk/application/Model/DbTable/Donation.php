@@ -6,6 +6,7 @@ class Model_DbTable_Donation extends Zend_Db_Table_Abstract {
   public function fetchCurrentUserDonation($userId) {
     $select = new Zend_Db_Table_Select($this);
     $select->where('user_id = ?',$userId);
+    $select->order('date ASC');
     $donation = $this->fetchRow($select);
     if ($donation) {
       $donation = $donation->toArray();
