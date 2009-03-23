@@ -17,11 +17,21 @@
     <?php } else { ?>
     
       <p><?php print($this->list_title) ?></p>
+      <ul class="search-result">
       <?php
         foreach($this->paginator as $charity)
         {
-          print('<p><a href="'.$this->url(array('charityid'=>$charity['charity_id']),'viewcharity').'">'.$charity['name'].'</a><br />'.substr($charity['description'],0,200).'</p>');
+          ?>
+          <li>
+          <?php print $this->partial('pie\addtopie.phtml',array('type'=>'charity','id'=>$charity["charity_id"])); ?>
+          <a href="<?php print $this->url(array('charityid'=>$charity['charity_id']),'viewcharity') ?>"><?php print $charity['name'] ?></a>
+          <br /><?php print substr($charity['description'],0,200) ?>
+          </li>
+          <?php
         }
+      ?>
+      </ul>
+      <?php
         print $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml',array('page_url'=>$this->page_url,'page_route'=>$this->page_route));
 	  }
 

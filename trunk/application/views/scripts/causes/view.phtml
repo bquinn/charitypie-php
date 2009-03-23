@@ -10,9 +10,9 @@
 <!-- created by $this->cause['user_id'] -->
 <!-- Nth most popular cause on myCharityPie in the last XX days -->
 
-<div class="cause-description"><?php print $this->cause['description']?></div>
+<?php print $this->partial('pie\addtopie.phtml',array('type'=>'cause','id'=>$this->cause['cause_id'])); ?>
 
-<a href="<?php print $this->url(array('recipientType'=>'cause','recipientId'=>$this->cause["cause_id"]),'addslice',true) ?>">[ add to my pie ]</a>
+<div class="cause-description"><?php print $this->cause['description']?></div>
 
 <?php print $this->partial('pie/index.phtml',array('pie'=>$this->pie)); ?>
 

@@ -14,13 +14,23 @@
       <p>No causes found</p>
 
     <?php } else { ?>
-    
+      <ul class="search-results">
       <?php
         foreach($this->paginator as $cause)
         {
-          print('<p><a href="'.$this->url(array('causeid'=>$cause['cause_id']),'viewcause').'">'.$cause['title'].'</a><br />'.substr($cause['description'],0,200).'</p>');
+          ?>
+          <li>
+          <a href="<?php print $this->url(array('causeid'=>$cause['cause_id']),'viewcause') ?>">
+          <?php print $this->partial('pie\addtopie.phtml',array('type'=>'cause','id'=>$cause['cause_id'])); ?>
+          <?php print $cause['title'] ?></a>
+          <br /><?php print substr($cause['description'],0,200) ?>
+          </li>
+          <?php
         }
         print $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml',array('page_url'=>$this->page_url,'page_route'=>$this->page_route));
+      ?>
+      </ul>
+      <?php
 	  }
 
 		?>

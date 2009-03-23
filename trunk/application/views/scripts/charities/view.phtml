@@ -10,6 +10,8 @@
     <div id="mainContent">
         <h3><?php echo $this->charity["name"] ?></h3>
 
+        <?php print $this->partial('pie\addtopie.phtml',array('type'=>'charity','id'=>$this->charity["charity_id"])); ?>
+
 		<dl>
             <dt>Description</dt>
             <dd><?php echo $this->charity["description"] ?></dd>
@@ -28,7 +30,6 @@
 			<dd>&nbsp;</dd>
 			<dd></dd>
 			<dd>... other stuff about finances, contacts etc ... </dd>
-			<dd><a href="<?php print $this->url(array('recipientType'=>'charity','recipientId'=>$this->charity["charity_id"]),'addslice',true) ?>">[ add to my pie ]</a></dd>
 		<dl>
     </div>
     <br class="clear" />
