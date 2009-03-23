@@ -13,6 +13,7 @@
 <?php print $this->partial('pie/index.phtml',array('pie'=>$this->pie)); ?>
 
 <?php if ($this->user()) { ?>
+  <br class="clear" />
   <h3>My Causes</h3>
   <?php
   foreach ($this->causes as $cause) {
