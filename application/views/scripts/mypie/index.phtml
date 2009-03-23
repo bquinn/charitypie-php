@@ -1,19 +1,29 @@
 <?php $this->placeholder('site-section')->set('mypie'); ?>
 
-<?php echo $this->menu('mypie'); ?>
+<h2>My Pie</h3>
 
-<div id="contents">
-
-<?php $this->searchSidebar(); ?>
-
+<!-- SYSTEM MESSAGES -->
 <?php if (!empty($this->messages)) { ?>
   <h1><?php print_r ($this->messages) ?></h1>
 <?php } ?>
 
-<h2>My Pie</h3>
+<!-- DONATION INFO -->
+<?php if ($this->user > 0) { ?>
+<div class="donations">
+  <?php if ($this->donation == null) { ?>
+    I don't have a monthly donation amount set up.
+    <?php print $this->donate_form; ?>
+  <?php } else { ?>
+    I'm currently donating £<?php print ($this->donation['amount']); ?> a month.
+    <a href="<?php print $this->url(array('controller'=>'mypie','action'=>'donate'),'default'); ?>">change</a>
+  <?php } ?>
+</div>
+<?php } ?>
 
+<!-- THE PIE -->
 <?php print $this->partial('pie/index.phtml',array('pie'=>$this->pie)); ?>
 
+<!-- CAUSES -->
 <?php if ($this->user()) { ?>
   <br class="clear" />
   <h3>My Causes</h3>

@@ -9,6 +9,7 @@ class MyPieController extends Zend_Controller_Action {
   protected $_model;
   protected $_sliceModel;
   protected $_userModel;
+  protected $_donationModel;
 
   protected function _getModel() {
     if (null === $this->_model) {
@@ -29,6 +30,12 @@ class MyPieController extends Zend_Controller_Action {
 			$this->_userModel = new Model_User();
 		}
 		return $this->_userModel;
+	}
+  protected function _getDonationModel() {
+		if (null == $this->_donationModel) {
+			$this->_donationModel = new Model_DbTable_Donation();
+		}
+		return $this->_donationModel;
 	}
   /**
    * Get the currently authenticated users id
@@ -63,16 +70,24 @@ class MyPieController extends Zend_Controller_Action {
 
   public function indexAction() {
     $pieId = $this->_helper->Pie->getUserPieId();
+    $userId = $this->getUserId();
 
-    $causes = $this->getUserCauses();
+    $causes   = $this->getUserCauses();
 
-    $this->view->pieId = $pieId;
-    $this->view->causes = $causes;
+    $donation = null;
+    if ($userId > 0) {
+      $donation = $this->_getDonationModel()->fetchCurrentUserDonation($userId);
+    }
 
     $this->_helper->getHelper('Pie')->setViewPie($pieId,$this);
-    
+
+    $this->view->donate_form = $this->getDonateForm();
+    $this->view->user       = $userId;
+    $this->view->donation   = $donation;
+    $this->view->pieId      = $pieId;
+    $this->view->causes     = $causes;
     $this->view->cause_form = $this->getCreateCauseForm();
-    $this->view->messages = $this->_helper->FlashMessenger->getMessages();
+    $this->view->messages   = $this->_helper->FlashMessenger->getMessages();
   }
 
   public function createcauseAction() {
@@ -105,6 +120,37 @@ class MyPieController extends Zend_Controller_Action {
     $form->setAction('mypie/createcause');
     $form->addElement('text','name',array('label'=>'cause name'));
     $form->addElement('submit','create');
+    return $form;
+  }
+
+  public function donateAction() {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $donation = $_POST['donation'];
+      $userId   = $this->getUserId();
+
+      $this->_getDonationModel()->create($userId,$donation);
+
+      $this->getHelper(redirector)->direct('index');
+    }
+    
+    $this->view->donate_form = $this->getDonateForm();
+  }
+
+  public function getDonateForm() {
+    $form = new Zend_Form();
+    $form->setAction('mypie/donate');
+    $form->addElement('text','donation');
+    $form->addElement('submit','Donate');
+
+    $form->removeDecorator('DtDdWrapper');
+    $form->removeDecorator('Label');
+    $form->removeDecorator('HtmlTag');
+    foreach($form->getElements() as $element) {
+      $element->removeDecorator('DtDdWrapper');
+      $element->removeDecorator('Label');
+      $element->removeDecorator('HtmlTag');
+    }
+
     return $form;
   }
 
