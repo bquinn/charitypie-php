@@ -10,3 +10,18 @@ foreach ($this->tags as $tag) {
   ),'browsecauses') ?>"><?php print $tag['label'] ?></a> (<?php print $tag['causes']?>) <?php
 }
 ?>
+
+<!-- CAUSES -->
+<?php if ($this->user()) { ?>
+  <br class="clear" />
+  <h3>My Causes</h3>
+  <?php
+  foreach ($this->causes as $cause) {
+    ?><a href="<?php print $this->url(array('causeid'=>$cause['cause_id']),'viewcause',true) ?>"><?php print $cause['title'] ?></a><br/><?php
+  }
+  ?>
+  <h3>New Cause:</h3>
+  <?php
+  print $this->cause_form;
+}
+?>

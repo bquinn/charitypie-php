@@ -103,6 +103,50 @@ class CausesController extends Zend_Controller_Action {
     return $form;
   }
 
+
+  public function createAction() {
+    if (!$this->getRequest()->isPost()) {
+      return $this->_forward('index');
+    }
+
+    $form = $this->getCreateCauseForm();
+
+    if (!$form->isValid($_POST)) {
+      $this->view->form = $form;
+      return $this->render('form');
+    }
+
+    $userId = $this->_getUserId();
+    $posted = $form->getValues();
+
+    if (!$userId) {
+      return $this->getHelper(redirector)->direct('index');
+    }
+
+    $causeId = $this->_getModel()->create($posted['name'],$userId);
+    $pieId   = $this->_getPieModel()->createPie($causeId,'CAUSE');
+
+    $this->getHelper(redirector)->direct('index');
+  }
+
+  public function getCreateCauseForm() {
+    $form = new Zend_Form();
+    $form->setAction('causes/create');
+    $form->addElement('text','name',array('label'=>'cause name'));
+    $form->addElement('submit','create');
+    return $form;
+  }
+
+
+  protected function getUserCauses() {
+    $user = $this->_getUserId();
+    $causes = array();
+    if ($user) {
+      $causes = $this->_getModel()->fetchCauses('user_id = '.$user);
+    }
+    return $causes;
+  }
+
   public function tagAction() {
     $causeId = $_POST['causeid'];
     $tag     = $_POST['label'];
@@ -154,7 +198,11 @@ class CausesController extends Zend_Controller_Action {
   }
 
   public function indexAction() {
+    $causes   = $this->getUserCauses();
+
     $this->_helper->layout->setLayout('search_sidebar');
+    $this->view->cause_form = $this->getCreateCauseForm();
+    $this->view->causes = $causes;
     $this->view->tags = $this->_getModel()->fetchAllTags();
   }
 
