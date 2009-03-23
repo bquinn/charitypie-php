@@ -275,3 +275,15 @@ p.copyright {
   margin: 10px auto;
   padding: 6px;
 }
+.add-to-pie {
+  border: solid 1px CornFlowerBlue;
+  background: LightSteelBlue;
+  float: right;
+  padding: 10px;
+  color: Navy;
+}
+.add-to-pie:hover {
+  border: solid 1px LightSteelBlue;
+  background: AliceBlue;
+  color: Navy;
+}
