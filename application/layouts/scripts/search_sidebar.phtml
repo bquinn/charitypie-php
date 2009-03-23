@@ -26,24 +26,30 @@
 
 <div id="container">
 
-  <div id="header">
-    <div id="logo">
-      <p>
-        <a href="<?php print $this->baseUrl(); ?>/" title="Back to Home"><img src="<?php print $this->baseUrl() ?>/img/logo.png" /></a>
-      </p>
-    </div>
-    <div id="description">
-      <h2>One donation, many charities</h2>
-      <p>Find your favourite charities. Discover new charities.<br/>
-  See your friends' favourite charities.<br/>
-  Put them all together to make your own CharityPie.<br/>
-  Make a cause of your selected charities.<br/>
-  Share them with your friends!</p>
-    </div>
-  </div>
+<div id="header">
+	<div id="logo">
+		<p>
+			<a href="<?php print $this->baseUrl(); ?>/" title="Back to Home"><img src="<?php print $this->baseUrl() ?>/img/logo.png" /></a>
+		</p>
+	</div>
+	<div id="description">
+		<h2>One donation, many charities</h2>
+		<p>Find your favourite charities. Discover new charities.<br/>
+See your friends' favourite charities.<br/>
+Put them all together to make your own CharityPie.<br/>
+Make a cause of your selected charities.<br/>
+Share them with your friends!</p>
+	</div>
+</div>
 
-  <?php echo $this->menu('mypie'); ?>
-  <?php echo $this->layout()->content ?>
+<?php echo $this->menu('mypie'); ?>
+
+<div id="contents">
+  <?php $this->searchSidebar(); ?>
+
+  <div id="mainContent">
+    <?php echo $this->layout()->content ?>
+  </div>
 
 </div>
 

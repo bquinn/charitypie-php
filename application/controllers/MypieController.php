@@ -81,6 +81,7 @@ class MyPieController extends Zend_Controller_Action {
 
     $this->_helper->getHelper('Pie')->setViewPie($pieId,$this);
 
+    $this->_helper->layout->setLayout('search_sidebar');
     $this->view->donate_form = $this->getDonateForm();
     $this->view->user       = $userId;
     $this->view->donation   = $donation;

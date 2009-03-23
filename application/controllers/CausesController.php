@@ -154,6 +154,7 @@ class CausesController extends Zend_Controller_Action {
   }
 
   public function indexAction() {
+    $this->_helper->layout->setLayout('search_sidebar');
     $this->view->tags = $this->_getModel()->fetchAllTags();
   }
 
@@ -171,6 +172,7 @@ class CausesController extends Zend_Controller_Action {
 
     $page_url = array('tagid'=>$tagId);
 
+    $this->_helper->layout->setLayout('search_sidebar');
     $this->view->page_route = "browsecauses";
     $this->view->page_url = $page_url;
     $this->view->tag = $tag[0];
@@ -196,6 +198,7 @@ class CausesController extends Zend_Controller_Action {
 
     $this->_helper->getHelper('Pie')->setViewPie($pieId,$this);
 
+    $this->_helper->layout->setLayout('search_sidebar');
     $this->view->tagging_count = $tagging_count;
     $this->view->user      = $userId;
     $this->view->user_tags = $user_tags;

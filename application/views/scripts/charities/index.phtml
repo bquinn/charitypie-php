@@ -1,43 +1,32 @@
 <?php $this->placeholder('site-section')->set('charities'); ?>
 
-<?php echo $this->menu('charities'); ?>
+<h3>Charities</h3>
 
-<div id="contents">
+<?php if (count($this->paginator) == 0) { ?>
 
-  <?php $this->searchSidebar(); ?>
+  <p>Please use the search box to the left to find your favourite charity or browse the list of charities.</p>
+  <p>Our list of charities is quite short while we're in development. We have secured access to the Charities Commission's database, so over time we will be moving the whole database online. In the meantime, if you want your favourite charity listed, please <a href="mailto:mycharitypie@yahoo.co.uk">email us</a>.</p>
 
-	<div id="mainContent">
-    <h3>Charities</h3>
-    
-    <?php if (count($this->paginator) == 0) { ?>
-      
-      <p>Please use the search box to the left to find your favourite charity or browse the list of charities.</p>
-      <p>Our list of charities is quite short while we're in development. We have secured access to the Charities Commission's database, so over time we will be moving the whole database online. In the meantime, if you want your favourite charity listed, please <a href="mailto:mycharitypie@yahoo.co.uk">email us</a>.</p>
+<?php } else { ?>
 
-    <?php } else { ?>
-    
-      <p><?php print($this->list_title) ?></p>
-      <ul class="search-result">
-      <?php
-        foreach($this->paginator as $charity)
-        {
-          ?>
-          <li>
-          <?php print $this->partial('pie\addtopie.phtml',array('type'=>'charity','id'=>$charity["charity_id"])); ?>
-          <a href="<?php print $this->url(array('charityid'=>$charity['charity_id']),'viewcharity') ?>"><?php print $charity['name'] ?></a>
-          <br /><?php print substr($charity['description'],0,200) ?>
-          </li>
-          <?php
-        }
+  <p><?php print($this->list_title) ?></p>
+  <ul class="search-result">
+  <?php
+    foreach($this->paginator as $charity)
+    {
       ?>
-      </ul>
+      <li>
+      <?php print $this->partial('pie\addtopie.phtml',array('type'=>'charity','id'=>$charity["charity_id"])); ?>
+      <a href="<?php print $this->url(array('charityid'=>$charity['charity_id']),'viewcharity') ?>"><?php print $charity['name'] ?></a>
+      <br /><?php print substr($charity['description'],0,200) ?>
+      </li>
       <?php
-        print $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml',array('page_url'=>$this->page_url,'page_route'=>$this->page_route));
-	  }
+    }
+  ?>
+  </ul>
+  <?php
+    print $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml',array('page_url'=>$this->page_url,'page_route'=>$this->page_route));
+}
 
-		?>
-	</div>
-
-    <br class="clear" />
-</div>
+?>
 

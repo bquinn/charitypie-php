@@ -1,41 +1,30 @@
 <?php $this->placeholder('site-section')->set('causes'); ?>
 
-<?php echo $this->menu('charities'); ?>
+<h3>Causes tagged as <?php print $this->tag['label']; ?></h3>
 
-<div id="contents">
+<?php if (count($this->paginator) == 0) { ?>
 
-  <?php $this->searchSidebar(); ?>
+  <p>No causes found</p>
 
-	<div id="mainContent">
-    <h3>Causes tagged as <?php print $this->tag['label']; ?></h3>
-    
-    <?php if (count($this->paginator) == 0) { ?>
-      
-      <p>No causes found</p>
-
-    <?php } else { ?>
-      <ul class="search-results">
-      <?php
-        foreach($this->paginator as $cause)
-        {
-          ?>
-          <li>
-          <a href="<?php print $this->url(array('causeid'=>$cause['cause_id']),'viewcause') ?>">
-          <?php print $this->partial('pie\addtopie.phtml',array('type'=>'cause','id'=>$cause['cause_id'])); ?>
-          <?php print $cause['title'] ?></a>
-          <br /><?php print substr($cause['description'],0,200) ?>
-          </li>
-          <?php
-        }
-        print $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml',array('page_url'=>$this->page_url,'page_route'=>$this->page_route));
+<?php } else { ?>
+  <ul class="search-results">
+  <?php
+    foreach($this->paginator as $cause)
+    {
       ?>
-      </ul>
+      <li>
+      <a href="<?php print $this->url(array('causeid'=>$cause['cause_id']),'viewcause') ?>">
+      <?php print $cause['title'] ?></a>
+      <?php print $this->partial('pie\addtopie.phtml',array('type'=>'cause','id'=>$cause['cause_id'])); ?>
+      <br /><?php print substr($cause['description'],0,200) ?>
+      </li>
       <?php
-	  }
+    }
+    print $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml',array('page_url'=>$this->page_url,'page_route'=>$this->page_route));
+  ?>
+  </ul>
+  <?php
+}
 
-		?>
-	</div>
-
-    <br class="clear" />
-</div>
+?>
 
