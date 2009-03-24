@@ -18,6 +18,10 @@
  // that corresponds to the app's environment
  $configuration = new Zend_Config_Ini( APPLICATION_PATH . '/config/app.ini', APPLICATION_ENVIRONMENT );
 
+ // COLORS
+
+ define('COLORS',"#d01f3c,#356aa0,#C79810,#FF0000,#00FF00,#0000FF,#F0F0F0,#FF00FF,#FFFFFF,#000000");
+
  // SESSION - configure how we handle sessions
  // would prefer to join this up with the main config file but it doesn't seem to work?
  

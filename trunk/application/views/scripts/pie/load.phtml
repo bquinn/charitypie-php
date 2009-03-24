@@ -1,9 +1,14 @@
+<?php
+$colors = explode(',',COLORS);
+$colors = implode($colors,"','");
+$colors = "'".$colors."'";
+?>
 {
   "bg_colour":"#f8f8ff",
   "elements":[
     {
       "type":      "pie",
-      "colours":   ["#d01f3c","#356aa0","#C79810"],
+      "colours":   [<?php print $colors ?>],
       "alpha":     0.6,
       "border":    1,
       "animate":   0,
@@ -15,7 +20,6 @@ foreach ($this->slices as $slice) {
   if ($i > 0) print ',';
   ?>{
     "value":<?php print $slice['percentage'] ?>,
-    "label":"<?php print $slice['recipient_name'] ?>",
     "id":"<?php print $slice['slice_id'] ?>"
     }<?php
   $i++;
