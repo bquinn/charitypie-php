@@ -69,10 +69,11 @@
 
       swfobject.embedSWF(
         "<?php print $this->baseUrl() ?>/flash/version-2/open-flash-chart.swf", "my_chart", "550", "200",
-        "9.0.0", "expressInstall.swf"
+        "9.0.0", "expressInstall.swf", "", {wmode:'opaque'}
       );
     </script>
     <div id="my_chart"></div>
+
 
     <?php
       if (empty($this->pie->pie_slices)) {
