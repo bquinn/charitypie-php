@@ -246,7 +246,11 @@ class CausesController extends Zend_Controller_Action {
 
     $this->_helper->getHelper('Pie')->setViewPie($pieId,$this);
 
-    $this->_helper->layout->setLayout('search_sidebar');
+    if ($this->getRequest()->isXmlHttpRequest() == 1) {
+      $this->_helper->layout->setLayout('blank');
+    } else {
+      $this->_helper->layout->setLayout('search_sidebar');
+    }
     $this->view->tagging_count = $tagging_count;
     $this->view->user      = $userId;
     $this->view->user_tags = $user_tags;

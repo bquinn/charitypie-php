@@ -16,20 +16,39 @@ $colors = "'".$colors."'";
       "border":    1,
       "animate":   0,
       "start-angle": 35,
+      "on-click":"show_slice_info",
       "values" :   [
-<?php
-$i = 0;
-foreach ($this->slices as $slice) {
-  if ($i > 0) print ',';
-  ?>{
-    "value":<?php print $slice['percentage'] ?>,
-    "label":"<?php print $slice['recipient_name'] ?>",
-    "id":"<?php print $slice['slice_id'] ?>"
-    }<?php
-  $i++;
-}
-?>
+        <?php
+        $i = 0;
+        foreach ($this->slices as $slice) {
+          if ($i > 0) print ',';
+          ?>{
+            "value":<?php print $slice['percentage'] ?>,
+            "label":"<?php print $slice['recipient_name'] ?>",
+            "id":"<?php print $slice['slice_id'] ?>"
+            }<?php
+          $i++;
+        }
+        ?>
       ]
     }
   ]
 }
+
+function show_slice_info(index){
+  tb_show("",slice_urls[index],false);
+}
+
+slice_urls = [<?php
+        $i = 0;
+        foreach ($this->slices as $slice) {
+          if ($i > 0) print ',';
+          if ($slice['recipient_type'] == 'CHARITY') {
+            print '"'.$this->url(array('charityid'=>$slice['recipient_id']),'viewcharity').'?width=400&height=400"';
+          } else {
+            print '"'.$this->url(array('causeid'=>$slice['recipient_id']),'viewcause').'?width=700&height=400"';
+          }
+            
+          $i++;
+        }
+        ?>]

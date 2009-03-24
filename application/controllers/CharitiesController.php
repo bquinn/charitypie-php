@@ -114,6 +114,7 @@ class CharitiesController extends Zend_Controller_Action {
   }
 
   public function viewAction() {
+    
     $charity_id = $this->_getParam("charityid");
 
     $charity_model = $this->_getModel();
@@ -121,7 +122,11 @@ class CharitiesController extends Zend_Controller_Action {
     # get info on the charity itself
     $charity = $charity_model->fetchCharityById($charity_id);
 
-    $this->_helper->layout->setLayout('search_sidebar');
+    if ($this->getRequest()->isXmlHttpRequest() == 1) {
+      $this->_helper->layout->setLayout('blank');
+    } else {
+      $this->_helper->layout->setLayout('search_sidebar');
+    }
     $this->view->charity = $charity;
   }
 
