@@ -7,6 +7,9 @@ $colors = "'".$colors."'";
   "bg_colour":"#f8f8ff",
   "elements":[
     {
+      "gradient-fill": true,
+      "tip": "#label# <br> #percent#",
+      "no-labels": true,
       "type":      "pie",
       "colours":   [<?php print $colors ?>],
       "alpha":     0.6,
@@ -20,6 +23,7 @@ foreach ($this->slices as $slice) {
   if ($i > 0) print ',';
   ?>{
     "value":<?php print $slice['percentage'] ?>,
+    "label":"<?php print $slice['recipient_name'] ?>",
     "id":"<?php print $slice['slice_id'] ?>"
     }<?php
   $i++;
