@@ -15,7 +15,7 @@
     <?php print $this->donate_form; ?>
   <?php } else { ?>
     I'm currently donating £<?php print ($this->donation['amount']); ?> a month.
-    <a href="<?php print $this->url(array('controller'=>'mypie','action'=>'donate'),'default'); ?>">change</a>
+    <a class="thickbox" href="<?php print $this->url(array('controller'=>'mypie','action'=>'donate'),'default'); ?>?height=100&width=200">change</a>
   <?php } ?>
 </div>
 <?php } ?>
