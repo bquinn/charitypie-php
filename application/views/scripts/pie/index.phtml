@@ -45,7 +45,7 @@
     <script type="text/javascript">
     var data;
 
-    data = <?php print $this->partial('pie\load.phtml',array('slices'=>$this->pie->pie_slices)); ?>
+    data = <?php print $this->partial('pie/load.phtml',array('slices'=>$this->pie->pie_slices)); ?>
 
     function open_flash_chart_data() {
       return JSON.stringify(data);
