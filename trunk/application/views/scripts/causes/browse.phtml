@@ -15,7 +15,7 @@
       <li>
       <a href="<?php print $this->url(array('causeid'=>$cause['cause_id']),'viewcause') ?>">
       <?php print $cause['title'] ?></a>
-      <?php print $this->partial('pie\addtopie.phtml',array('type'=>'cause','id'=>$cause['cause_id'])); ?>
+      <?php print $this->partial('pie/addtopie.phtml',array('type'=>'cause','id'=>$cause['cause_id'])); ?>
       <br /><?php print substr($cause['description'],0,200) ?>
       </li>
       <?php
