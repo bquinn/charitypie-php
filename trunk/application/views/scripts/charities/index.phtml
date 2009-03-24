@@ -16,7 +16,7 @@
     {
       ?>
       <li>
-      <?php print $this->partial('pie/addtopie.phtml',array('type'=>'charity','id'=>$charity["charity_id"])); ?>
+      <?php print $this->partial('pie/addtopie.phtml',array('type'=>'charity','id'=>$charity["charity_id"], hasCauses=>$this->hasCauses)); ?>
       <a href="<?php print $this->url(array('charityid'=>$charity['charity_id']),'viewcharity') ?>"><?php print $charity['name'] ?></a>
       <br /><?php print substr($charity['description'],0,200) ?>
       </li>

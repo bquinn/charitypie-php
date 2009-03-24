@@ -4,7 +4,7 @@
     $this->headScript()->appendFile('http://ui.jquery.com/ui/ui.slider.js');
     $this->headScript()->appendFile($this->baseUrl().'/js/thickbox-compressed.js');
 ?>
-<a class="thickbox" href="<?php print $this->url(array('recipientType'=>$this->type,'recipientId'=>$this->id),'addslice',true) ?>?width=250&height=150"
-  class="add-to-pie">
+<a href="<?php print $this->url(array('recipientType'=>$this->type,'recipientId'=>$this->id),'addslice',true); if ($this->hasCauses) { ?>?width=250&height=150<?}?>"
+  class="add-to-pie<?php if ($this->hasCauses) { ?> thickbox<?}?>">
   add to my pie
 </a>

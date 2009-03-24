@@ -9,6 +9,8 @@ class CharitiesController extends Zend_Controller_Action {
   protected $_model;
   protected $_categoryModel;
   protected $_tagModel;
+  protected $_userModel;
+  protected $_causeModel;
 
   protected function _getModel() {
     if (null === $this->_model) {
@@ -27,6 +29,34 @@ class CharitiesController extends Zend_Controller_Action {
       $this->_tagModel = new Model_Tag();
     }
     return $this->_tagModel;
+  }
+  protected function _getUserModel() { 
+    if (null == $this->_userModel) {
+      require_once APPLICATION_PATH . '/Model/User.php';
+      $this->_userModel = new Model_User();
+    }   
+    return $this->_userModel;
+  } 
+  protected function _getCauseModel() {
+    if (null == $this->_causeModel) {
+      require_once APPLICATION_PATH . '/Model/DbTable/Cause.php';
+      $this->_causeModel = new Model_DbTable_Cause();
+    }
+    return $this->_causeModel;
+  }
+
+  /**
+   * Return all causes for currently authenticated user
+   *
+   * @return <type>
+   */
+  protected function getUserCauses() {
+    $user = $this->_helper->Pie->getUserId();
+    $causes = array();
+    if ($user) {
+      $causes = $this->_getCauseModel()->fetchCauses('user_id = '.$user);
+    }
+    return $causes;
   }
 
   public function setupAction() {
@@ -107,6 +137,7 @@ class CharitiesController extends Zend_Controller_Action {
     }
 
     $this->_helper->layout->setLayout('search_sidebar');
+    $this->view->hasCauses  = $this->getUserCauses() ? 1 : 0;
     $this->view->paginator  = $paginator;
     $this->view->page_url   = $page_url;
     $this->view->page_route = $page_route;
