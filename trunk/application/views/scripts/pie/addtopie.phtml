@@ -1,4 +1,10 @@
-<a href="<?php print $this->url(array('recipientType'=>$this->type,'recipientId'=>$this->id),'addslice',true) ?>"
+<?php 
+    $this->headScript()->appendFile('http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js');
+    $this->headScript()->appendFile('http://ui.jquery.com/ui/ui.core.js');
+    $this->headScript()->appendFile('http://ui.jquery.com/ui/ui.slider.js');
+    $this->headScript()->appendFile($this->baseUrl().'/js/thickbox-compressed.js');
+?>
+<a class="thickbox" href="<?php print $this->url(array('recipientType'=>$this->type,'recipientId'=>$this->id),'addslice',true) ?>?width=250&height=150"
   class="add-to-pie">
   add to my pie
 </a>
