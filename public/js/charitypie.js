@@ -69,6 +69,18 @@ function findSWF(movieName) {
   }
 }
 
+var pie_change_message;
+function insertChangedPieMessage() {
+  notice = $('.pie-control').find('.notice');
+  if (notice.length == 0) {
+    notice = $('<div class="notice"></div>');
+    mssg = $('<p></p>').html(pie_change_message);
+    notice = $(notice).append(mssg).css('display','none');
+    $('.pie-control').prepend(notice);
+    $(notice).show('fast');
+  }
+}
+
 function update_pie()
 {
   chart_data = data;
@@ -93,26 +105,27 @@ function update_pie()
     x = tmp.load( JSON.stringify(chart_data) );
 }
 	
-	$(function() {
-		$("#pie_slices .slice-size").each(function(){
-      var value = $(this).val();
-      var div = $('<div></div>');
-      $(div).slider({
-        orientation: "horizontal",
-        range: "min",
-        min: 1,
-        max: 100,
-        value: value,
-        stop: function(event, ui) {
-          slices = $('#pie_slices').serializeArray();
-          $.post($('#pie_slices').attr('action'),slices);
-        },
-        slide: function(event, ui) {
-          $(event.target).prev().val(ui.value);
-          update_pie();
-        }
-      });
-      $(this).after(div).css('display','none');
-    })
-    $("#pie_slices input[type=submit]").remove();
-	});
+$(function() {
+$("#pie_slices .slice-size").each(function(){
+  var value = $(this).val();
+  var div = $('<div></div>');
+  $(div).slider({
+    orientation: "horizontal",
+    range: "min",
+    min: 1,
+    max: 100,
+    value: value,
+    stop: function(event, ui) {
+      slices = $('#pie_slices').serializeArray();
+      $.post($('#pie_slices').attr('action'),slices);
+      insertChangedPieMessage();
+    },
+    slide: function(event, ui) {
+      $(event.target).prev().val(ui.value);
+      update_pie();
+    }
+  });
+  $(this).after(div).css('display','none');
+})
+$("#pie_slices input[type=submit]").remove();
+});

@@ -267,6 +267,27 @@ p.copyright {
 .pie-control .slices-control {
   width: 450px;
   text-align: left;
+  position: relative;
+  margin: 0px auto;
+}
+.pie-control .slice
+{
+  position: relative;
+  overflow: visible;
+  margin-bottom: 10px;
+}
+.pie-control .slice .key {
+  dispay: inline;
+  float: left;
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+  text-indent: -500px;
+  margin-right: 10px;
+  border: solid 1px black;
+}
+.pie-control .slice a {
+  clear: both;
 }
 .pie-control .notice {
   background: LightYellow;
