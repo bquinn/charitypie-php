@@ -20,7 +20,7 @@
 
  // COLORS
 
- define('COLORS',"#d01f3c,#356aa0,#C79810,#FF0000,#00FF00,#0000FF,#F0F0F0,#FF00FF,#FFFFFF,#000000");
+ define('COLORS',"#d01f3c,#356aa0,#C79810,#FF73B9,#8BFEA8,#CAFEB8,#6755E3,#8C8CFF,#7DFDD7,#FF8A8A");
 
  // SESSION - configure how we handle sessions
  // would prefer to join this up with the main config file but it doesn't seem to work?
