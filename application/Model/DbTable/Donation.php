@@ -24,4 +24,13 @@ class Model_DbTable_Donation extends Zend_Db_Table_Abstract {
     );
     $this->insert($data);
   }
+
+  public function updateDonation($userId,$donation) {
+    $data = array(
+      'amount'=>$donation,
+      'date'=>date('Y-m-d h:m:s')
+    );
+    $where = $this->getAdapter()->quoteInto('user_id = ?', $userId);
+    $this->update($data, $where);
+  }
 }

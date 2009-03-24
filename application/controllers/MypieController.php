@@ -87,12 +87,15 @@ class MyPieController extends Zend_Controller_Action {
     $this->view->messages   = $this->_helper->FlashMessenger->getMessages();
   }
 
+  public function testAction() {
+    $this->_helper->layout->setLayout('inline_action');
+  }
   public function donateAction() {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $donation = $_POST['donation'];
       $userId   = $this->getUserId();
 
-      $this->_getDonationModel()->create($userId,$donation);
+      $this->_getDonationModel()->updateDonation($userId,$donation);
 
       $this->getHelper(redirector)->direct('index');
     }
@@ -103,7 +106,7 @@ class MyPieController extends Zend_Controller_Action {
 
   public function getDonateForm() {
     $form = new Zend_Form();
-    $form->setAction('mypie/donate');
+    $form->setAction('/mypie/donate');
     $form->addElement('text','donation');
     $form->addElement('submit','Donate');
 
