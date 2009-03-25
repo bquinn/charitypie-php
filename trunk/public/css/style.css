@@ -10,6 +10,8 @@ br.clear { clear: both; height: 1px; margin: -1px 0 0 0; display: block; }
 
 p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,select,input{margin-bottom:0.6em}
 
+input, button { font-family: Helvetica, Arial, sans-serif; }
+
 body {
 	color: #333333;
 	font-family: Helvetica, Arial, sans-serif;
@@ -121,7 +123,11 @@ body { text-align: center; }
 	position: relative;
 	border-bottom-width: 3px;
 	border-bottom-style: solid;
+	border-bottom-color: #cccccc;
 	overflow: auto;
+}
+body.body-home #nav, body.body-register #nav, body.body-login #nav, body.body-about #nav {
+	display: none;
 }
 body.body-charities #nav {
 	border-bottom-color: #99cc6a;
@@ -139,7 +145,7 @@ body.body-mypie #nav {
 	display: inline;
 }
 #nav li a {
-	color: #333333;
+	color: #ffffff;
 	display: block;
 	padding-left: 15px;
 	padding-right: 15px;
@@ -147,7 +153,7 @@ body.body-mypie #nav {
 	font-size: 150%;
 	font-weight: bold;
 }
-#nav li a:hover { color: #ffffff; }
+#nav li a:hover { color: #666666; }
 #nav-charities, #nav-causes, #nav-mypie {
 	text-align: center;
 	-moz-border-radius-topleft: 6px;
@@ -161,9 +167,11 @@ body.body-mypie #nav {
 #nav #nav-charities { background: #99cc6a; margin-left: 549px;}
 #nav #nav-causes { background: #fdb741; }
 #nav #nav-mypie { background: #8193df; }
-body.body-charities #nav-charities a, body.body-causes #nav-causes a, body.body-mypie #nav-mypie a { color: #FFFFFF; }
+body.body-charities #nav-charities a, body.body-causes #nav-causes a, body.body-mypie #nav-mypie a { color: #333333; }
 
 #contents {	clear: both; }
+
+body.body-about #contents, body.body-register #contents, body.body-login #contents, body.body-registersuccess #contents { padding: 0 10px; }
 
 .homePages {
 	float: left;
@@ -177,6 +185,10 @@ body.body-charities #nav-charities a, body.body-causes #nav-causes a, body.body-
 }
 
 .homePages h2 { margin-bottom: 0.5em; }
+
+#page-charities h2 a { color: #99cc6a; }
+#page-causes h2 a { color: #fdb741; }
+#page-mypie h2 a { color: #8193df; }
 
 body.body-home #contents h1 { margin-left: 10px; }
 
@@ -235,8 +247,6 @@ body.body-about h5 {
 	font-size: 130%;
 }
 
-body.body-about #contents { padding: 0 10px; }
-
 ul.teamMembers li { list-style: disc; margin-left: 2em; }
 
 #footer {
@@ -260,7 +270,7 @@ p.copyright {
 .pie-control {
   border: solid 1px silver;
   background: ghostwhite;
-  width: 580px;
+  width: 97%;
   text-align: center;
   padding: 10px;
 }
