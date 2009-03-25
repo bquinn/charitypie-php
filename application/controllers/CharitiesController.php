@@ -151,7 +151,7 @@ class CharitiesController extends Zend_Controller_Action {
     $charity_model = $this->_getModel();
 
     # get info on the charity itself
-    $charity = $charity_model->fetchCharityById($charity_id);
+    $charity = $charity_model->fetchCharityDetails($charity_id);
 
     if ($this->getRequest()->isXmlHttpRequest() == 1) {
       $this->_helper->layout->setLayout('blank');

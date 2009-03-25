@@ -3,7 +3,7 @@
 <h3>Cause: <?php print $this->cause['title']?></h3>
 <!-- created by $this->cause['user_id'] -->
 <!-- Nth most popular cause on myCharityPie in the last XX days -->
-
+(<?php print $this->cause['followers']; ?> donators)
 <?php print $this->partial('pie/addtopie.phtml',array('type'=>'cause','id'=>$this->cause['cause_id'])); ?>
 
 <div class="cause-description"><?php print $this->cause['description']?></div>
