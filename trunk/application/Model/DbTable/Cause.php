@@ -27,9 +27,27 @@ class Model_DbTable_Cause extends Zend_Db_Table_Abstract {
     $select = new Zend_Db_Select($this->getAdapter());
     $select->from(array('c'=>'causes'))
            ->join(array('cl'=>'cause_label'),'cl.cause_id = c.cause_id')
+           ->joinLeft(array('s'=>'pie_slices'),
+              's.recipient_id = c.cause_id AND s.recipient_type = "CAUSE"',
+              array('followers'=>'COUNT(s.slice_id)')
+           )
            ->where('cl.tag_id = ?',$tagid)
            ->group('c.cause_id');
     return $select;
+  }
+
+  public function fetchCauseDetails($causeId) {
+    $select = new Zend_Db_Select($this->getAdapter());
+    $select->from(array('c'=>'causes'))
+           ->joinLeft(array('s'=>'pie_slices'),
+              's.recipient_id = c.cause_id AND s.recipient_type = "CAUSE"',
+              array('followers'=>'COUNT(s.slice_id)')
+           )
+           ->where('c.cause_id = ?',$causeId);
+
+    $return = $this->getAdapter()->fetchRow($select);
+
+    return $return;
   }
 
   public function fetchCauses($where = null) {

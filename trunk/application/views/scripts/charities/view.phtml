@@ -3,6 +3,8 @@
 <?php $action_url = $this->url(array(),'charities',true); ?>
     <h3><?php echo $this->charity["name"] ?></h3>
 
+(<?php print $this->charity['followers']; ?> donators)
+
     <?php print $this->partial('pie/addtopie.phtml',array('type'=>'charity','id'=>$this->charity["charity_id"])); ?>
 
 <dl>

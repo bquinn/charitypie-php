@@ -232,7 +232,7 @@ class CausesController extends Zend_Controller_Action {
     $pieId   = $this->_getPieModel()->fetchPieId($causeId,'CAUSE');
 
     $model = $this->_getModel();
-    $cause = $model->fetchRow('cause_id = '.$causeId)->toArray();
+    $cause = $model->fetchCauseDetails($causeId);
 
     $tags = $this->_getModel()->fetchCauseTags($causeId);
 

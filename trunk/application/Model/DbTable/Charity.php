@@ -9,6 +9,20 @@ class Model_DbTable_Charity extends Zend_Db_Table_Abstract {
 
   protected $dependentTables = array('Model_DbTable_CharityLabel');
 
+  public function fetchCharityDetails($charityId) {
+    $select = new Zend_Db_Select($this->getAdapter());
+    $select->from(array('c'=>'charities'))
+           ->joinLeft(array('s'=>'pie_slices'),
+              's.recipient_id = c.charity_id AND s.recipient_type = "CHARITY"',
+              array('followers'=>'COUNT(s.slice_id)')
+           )
+           ->where('c.charity_id = ?',$charityId);
+
+    $return = $this->getAdapter()->fetchRow($select);
+
+    return $return;
+  }
+
   /**
    * Returns a subset of tags that are actually used by charities
    */
@@ -45,7 +59,12 @@ class Model_DbTable_Charity extends Zend_Db_Table_Abstract {
     $select = new Zend_Db_Select($this->getAdapter());
     $select->from(array('c'=>'charities'))
            ->join(array('cc'=>'categories_charities'),'c.charity_id = cc.charity_id')
-           ->where('cc.category_id = ?',$categoryId);
+           ->joinLeft(array('s'=>'pie_slices'),
+              's.recipient_id = c.charity_id AND s.recipient_type = "CHARITY"',
+              array('followers'=>'COUNT(s.slice_id)')
+           )
+           ->where('cc.category_id = ?',$categoryId)
+           ->group('c.charity_id');
     return $select;
   }
 
@@ -57,7 +76,12 @@ class Model_DbTable_Charity extends Zend_Db_Table_Abstract {
     $searchStr = '%'.$search_str.'%';
     $select = new Zend_Db_Select($this->getAdapter());
     $select->from(array('c'=>'charities'))
-           ->where('c.name LIKE ?',$searchStr);
+           ->joinLeft(array('s'=>'pie_slices'),
+              's.recipient_id = c.charity_id AND s.recipient_type = "CHARITY"',
+              array('followers'=>'COUNT(s.slice_id)')
+           )
+           ->where('c.name LIKE ?',$searchStr)
+           ->group('c.charity_id');
     return $select;
   }
 
