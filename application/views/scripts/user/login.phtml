@@ -1,6 +1,9 @@
 <?php // login/index.phtml ?>
-<div id="stylized" class="myform">
-<h1>Please Login</h1>
+
+<?php $this->placeholder('site-section')->set('login'); ?>
+
+<div id="contents" class="myform">
+<h3>Please Login</h3>
 <p>To create your own CharityPie or rate or comment on charities, you must login.</p>
 <?php echo $this->form ?>
 <div class="spacer">&nbsp;</div>
