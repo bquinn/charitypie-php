@@ -34,6 +34,22 @@ class Model_DbTable_Charity extends Zend_Db_Table_Abstract {
       GROUP BY cl.tag_id");
   }
 
+  public function fetchMostPopularCharities() {
+    $select = new Zend_Db_Select($this->getAdapter());
+    $select->from(array('c'=>'charities'))
+           ->joinLeft(array('s'=>'pie_slices'),
+              's.recipient_id = c.charity_id AND s.recipient_type = "CHARITY"',
+              array('followers'=>'COUNT(s.slice_id)')
+           )
+           ->group('c.charity_id')
+           ->order('followers DESC')
+           ->limit(5);
+
+    $charities = $this->getAdapter()->fetchAll($select);
+
+    return $charities;
+  }
+
   /**
    * Retruns all categories with a charity count
    * @return array

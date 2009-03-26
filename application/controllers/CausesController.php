@@ -134,6 +134,16 @@ class CausesController extends Zend_Controller_Action {
     $form->setAction('causes/create');
     $form->addElement('text','name',array('label'=>'cause name'));
     $form->addElement('submit','create');
+
+    $form->removeDecorator('DtDdWrapper');
+    $form->removeDecorator('Label');
+    $form->removeDecorator('HtmlTag');
+    foreach($form->getElements() as $element) {
+      $element->removeDecorator('DtDdWrapper');
+      $element->removeDecorator('Label');
+      $element->removeDecorator('HtmlTag');
+    }
+
     return $form;
   }
 
@@ -200,6 +210,7 @@ class CausesController extends Zend_Controller_Action {
   public function indexAction() {
     $causes   = $this->getUserCauses();
 
+    $this->view->top_causes = $this->_getModel()->fetchMostPopularCauses();
     $this->_helper->layout->setLayout('search_sidebar');
     $this->view->cause_form = $this->getCreateCauseForm();
     $this->view->causes = $causes;

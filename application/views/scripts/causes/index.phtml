@@ -2,18 +2,25 @@
 
 <h3>Causes</h3>
 
-<?php
-foreach ($this->tags as $tag) {
-  ?><a href="<?php print $this->url(array(
-    'tagid'=>$tag['tag_id'],
-    'page'=>1
-  ),'browsecauses') ?>"><?php print $tag['label'] ?></a> (<?php print $tag['causes']?>) <?php
-}
-?>
+<p>
+  Build up support in favour of a cause by grouping charities with a common purpose
+</p>
 
-<!-- CAUSES -->
+<div class="causes-section <?php if ($this->user()) print "causes-section-multi"?>">
+  <h3>User tagged causes</h3>
+  <?php
+  foreach ($this->tags as $tag) {
+    ?><a href="<?php print $this->url(array(
+      'tagid'=>$tag['tag_id'],
+      'page'=>1
+    ),'browsecauses') ?>"><?php print $tag['label'] ?></a> (<?php print $tag['causes']?>) <?php
+  }
+  ?>
+</div>
+
+<!-- USER CAUSES -->
 <?php if ($this->user()) { ?>
-  <br class="clear" />
+<div class="causes-section causes-section-user causes-section-multi">
   <h3>My Causes</h3>
   <?php
   foreach ($this->causes as $cause) {
@@ -23,5 +30,13 @@ foreach ($this->tags as $tag) {
   <h3>New Cause:</h3>
   <?php
   print $this->cause_form;
+  ?>
+</div>
+<?php
 }
+?>
+
+<h3>Top 5 Causes</h3>
+<?php
+print $this->partial('causes/causes_listing.phtml',array('causes'=>$this->top_causes));
 ?>
