@@ -50,6 +50,22 @@ class Model_DbTable_Cause extends Zend_Db_Table_Abstract {
     return $return;
   }
 
+  public function fetchMostPopularCauses() {
+    $select = new Zend_Db_Select($this->getAdapter());
+    $select->from(array('c'=>'causes'))
+           ->joinLeft(array('s'=>'pie_slices'),
+              's.recipient_id = c.cause_id AND s.recipient_type = "CAUSE"',
+              array('followers'=>'COUNT(s.slice_id)')
+           )
+           ->group('c.cause_id')
+           ->order('followers DESC')
+           ->limit(5);
+
+    $causes = $this->getAdapter()->fetchAll($select);
+
+    return $causes;
+  }
+
   public function fetchCauses($where = null) {
     $select = "SELECT c.*, p.pie_id FROM causes AS c INNER JOIN pies AS p ON p.owner_id = c.cause_id AND p.owner_type = 'CAUSE'";
     if ($where) $select .= " WHERE ".$where;

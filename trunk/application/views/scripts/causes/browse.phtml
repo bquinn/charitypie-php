@@ -7,24 +7,9 @@
   <p>No causes found</p>
 
 <?php } else { ?>
-  <ul class="search-results">
   <?php
-    foreach($this->paginator as $cause)
-    {
-      ?>
-      <li>
-      <a href="<?php print $this->url(array('causeid'=>$cause['cause_id']),'viewcause') ?>">
-      <?php print $cause['title'] ?></a>
-      (<?php print $cause['followers']; ?> donators)
-      <?php print $this->partial('pie/addtopie.phtml',array('type'=>'cause','id'=>$cause['cause_id'])); ?>
-      <br /><?php print substr($cause['description'],0,200) ?>
-      </li>
-      <?php
-    }
-    print $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml',array('page_url'=>$this->page_url,'page_route'=>$this->page_route));
-  ?>
-  </ul>
-  <?php
+  print $this->partial('causes/causes_listing.phtml',array('causes'=>$this->paginator));
+  print $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml',array('page_url'=>$this->page_url,'page_route'=>$this->page_route));
 }
 
 ?>

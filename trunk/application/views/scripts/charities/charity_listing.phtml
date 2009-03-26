@@ -1,0 +1,23 @@
+<ul class="search-results">
+<?php
+  $i = 0;
+  foreach($this->charities as $charity)
+  {
+    ?>
+    <li class="<?php print(($i%2)==0)?'even':'odd'; ?>">
+    <?php print $this->partial('pie/addtopie.phtml',array('type'=>'charity','id'=>$charity["charity_id"], hasCauses=>$this->hasCauses)); ?>
+    <a href="<?php print $this->url(array('charityid'=>$charity['charity_id']),'viewcharity') ?>" class="search-result-item-link">
+      <?php print $charity['name'] ?>
+    </a>
+    (<?php print $charity['followers']; ?> donators)
+    <br />
+    <?php
+    print substr($charity['description'],0,160) ;
+    if (count_chars(($charity['description']>160))) print "....";
+    ?>
+    </li>
+    <?php
+    $i++;
+  }
+?>
+</ul>

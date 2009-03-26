@@ -318,6 +318,31 @@ p.copyright {
   background: AliceBlue;
   color: Navy;
 }
+.causes-section {
+  padding: 4px;
+}
+.causes-section-multi {
+  width: 350px;
+  float: left;
+}
+.causes-section-user {
+  border: solid 1px Yellow;
+  background: LightYellow;
+}
+/**
+ * Listings
+ */
+.search-results {
+  clear: both;
+  border-top: solid 1px silver;
+}
+.search-results li {
+  padding: 6px;
+  border-bottom: solid 1px silver;
+}
+.search-results li.even {
+  background: GhostWhite;
+}
 
 /**
  * Inline Actions

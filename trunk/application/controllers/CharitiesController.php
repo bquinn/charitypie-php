@@ -134,6 +134,9 @@ class CharitiesController extends Zend_Controller_Action {
       $page=$this->_getParam('page',1);
       $paginator->setItemCountPerPage(2);
       $paginator->setCurrentPageNumber($page);
+    } else {
+      $charities = $model->fetchMostPopularCharities();
+      $this->view->charities = $charities;
     }
 
     $this->_helper->layout->setLayout('search_sidebar');

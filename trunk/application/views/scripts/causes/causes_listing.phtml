@@ -1,0 +1,19 @@
+<ul class="search-results">
+<?php
+  $i = 0;
+  foreach($this->causes as $cause)
+  {
+    ?>
+    <li class="<?php print(($i%2)==0)?'even':'odd'; ?>">
+    <?php print $this->partial('pie/addtopie.phtml',array('type'=>'cause','id'=>$cause['cause_id'])); ?>
+    <a href="<?php print $this->url(array('causeid'=>$cause['cause_id']),'viewcause') ?>">
+    <?php print $cause['title'] ?></a>
+    (<?php print $cause['followers']; ?> donators)
+    <br /><?php print substr($cause['description'],0,200) ?>
+    <br class="clear"/>
+    </li>
+    <?php
+    $i++;
+  }
+?>
+</ul>
