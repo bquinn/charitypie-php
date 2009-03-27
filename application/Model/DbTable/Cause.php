@@ -43,7 +43,8 @@ class Model_DbTable_Cause extends Zend_Db_Table_Abstract {
               's.recipient_id = c.cause_id AND s.recipient_type = "CAUSE"',
               array('followers'=>'COUNT(s.slice_id)')
            )
-           ->where('c.cause_id = ?',$causeId);
+           ->where('c.cause_id = ?',$causeId)
+           ->group('c.cause_id');
 
     $return = $this->getAdapter()->fetchRow($select);
 

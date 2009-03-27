@@ -16,7 +16,8 @@ class Model_DbTable_Charity extends Zend_Db_Table_Abstract {
               's.recipient_id = c.charity_id AND s.recipient_type = "CHARITY"',
               array('followers'=>'COUNT(s.slice_id)')
            )
-           ->where('c.charity_id = ?',$charityId);
+           ->where('c.charity_id = ?',$charityId)
+           ->group('c.charity_id');
 
     $return = $this->getAdapter()->fetchRow($select);
 
