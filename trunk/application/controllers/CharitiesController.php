@@ -162,6 +162,7 @@ class CharitiesController extends Zend_Controller_Action {
       $this->_helper->layout->setLayout('search_sidebar');
     }
     $this->view->charity = $charity;
+    $this->view->hasCauses  = $this->getUserCauses() ? 1 : 0;
   }
 
 }
